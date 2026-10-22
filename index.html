@@ -1,849 +1,1082 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transparência Rubro-Negra - Credores Trabalhistas ECV</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- FontAwesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        ecv: {
-                            red: '#E20613',
-                            darkRed: '#A0040D',
-                            black: '#111113',
-                            cardBg: '#1A1A1E',
-                            border: '#2A2A30',
-                            gold: '#FFC72C',
-                            goldHover: '#E5B124',
-                            grayText: '#9CA3AF'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    }
-                }
-            }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transparência Rubro-Negra — Credores Trabalhistas</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<script>
+if (typeof tailwind !== "undefined") {
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ecv: {
+            red: "#E20613",
+            black: "#111113",
+            cardBg: "#1A1A1E",
+            border: "#2A2A30",
+            gold: "#FFC72C",
+            grayText: "#9CA3AF"
+          }
+        },
+        fontFamily: {
+          sans: ["Inter", "sans-serif"]
         }
-    </script>
-    <style>
-        body {
-            background-color: #0B0B0D;
-            color: #F3F4F6;
-            font-family: 'Inter', sans-serif;
-        }
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #111113;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #E20613;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #FFC72C;
-        }
-        .bg-pattern {
-            background-image: radial-gradient(rgba(226, 6, 19, 0.15) 1px, transparent 0);
-            background-size: 24px 24px;
-        }
-        .glow-red {
-            box-shadow: 0 0 25px rgba(226, 6, 19, 0.25);
-        }
-        .glow-gold {
-            box-shadow: 0 0 20px rgba(255, 199, 44, 0.2);
-        }
-    </style>
+      }
+    }
+  };
+}
+</script>
+
+<style>
+body {
+  background: #0B0B0D;
+  color: #F3F4F6;
+  font-family: Inter, sans-serif;
+}
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #111113; }
+::-webkit-scrollbar-thumb { background: #E20613; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #FFC72C; }
+.bg-pattern {
+  background-image: radial-gradient(rgba(226,6,19,.15) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+.glow-red { box-shadow: 0 0 25px rgba(226,6,19,.25); }
+details summary { cursor: pointer; }
+details[open] summary { margin-bottom: 8px; }
+button, select, input { font: inherit; }
+</style>
 </head>
-<body class="min-h-screen bg-pattern flex flex-col justify-between antialiased">
 
-    <!-- Header / Navbar -->
-    <header class="bg-ecv-black/90 backdrop-blur-md border-b border-ecv-border sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-               <img width="30" height="30" src="https://ecvitoria.com.br/wp-content/uploads/2026/05/ec-vitoria-escudo.svg" alt="">
-                <div>
-                    <h1 class="text-lg sm:text-xl font-extrabold tracking-tight text-white flex items-center gap-2">
-                        TRANSPARÊNCIA <span class="text-ecv-red">RUBRO-NEGRA</span>
-                    </h1>
-                    <p class="text-xs text-ecv-grayText">Processo TRT-5 Nº 0000580-54.2025.5.05.0013</p>
-                </div>
-            </div>
-            <div class="hidden md:flex items-center space-x-4 text-xs font-semibold">
-                <span class="px-3 py-1.5 rounded-full bg-ecv-red/20 text-ecv-red border border-ecv-red/30">
-                    <i class="fa-solid fa-scale-balanced mr-1">
-</i> TRT-5ª Região
-                </span>
-                <span class="px-3 py-1.5 rounded-full bg-ecv-gold/10 text-ecv-gold border border-ecv-gold/30">
-                    <i class="fa-solid fa-clock mr-1">
-</i> Atualizado: 10/2026
-                </span>
-            </div>
+<body class="min-h-screen bg-pattern antialiased">
+
+<header class="bg-ecv-black/90 backdrop-blur-md border-b border-ecv-border sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
+    <div class="flex items-center gap-3">
+      <img
+        width="30"
+        height="30"
+        src="https://ecvitoria.com.br/wp-content/uploads/2026/05/ec-vitoria-escudo.svg"
+        alt="Escudo do Vitória"
+      >
+      <div>
+        <h1 class="text-lg sm:text-xl font-extrabold tracking-tight text-white">
+          TRANSPARÊNCIA <span class="text-ecv-red">RUBRO-NEGRA</span>
+        </h1>
+        <p class="text-xs text-ecv-grayText">
+          Processo TRT-5 Nº 0000580-54.2025.5.05.0013
+        </p>
+      </div>
+    </div>
+
+    <div class="hidden md:flex items-center gap-3 text-xs font-semibold">
+      <span class="px-3 py-1.5 rounded-full bg-ecv-red/20 text-ecv-red border border-ecv-red/30">
+        <i class="fa-solid fa-scale-balanced mr-1"></i> TRT-5ª Região
+      </span>
+      <span class="px-3 py-1.5 rounded-full bg-ecv-gold/10 text-ecv-gold border border-ecv-gold/30">
+        <i class="fa-solid fa-clock mr-1"></i> Atualizado: 10/2026
+      </span>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
+
+  <section class="text-center space-y-3">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ecv-red/10 border border-ecv-red/30 text-ecv-red text-xs sm:text-sm font-semibold">
+      <i class="fa-solid fa-shield-halved"></i>
+      Procedimento de Reunião de Execução
+    </div>
+
+    <h2 class="text-3xl sm:text-5xl font-black tracking-tight">
+      Painel do Torcedor:
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-ecv-red via-red-500 to-ecv-gold">
+        Credores Trabalhistas
+      </span>
+    </h2>
+
+    <p class="max-w-3xl mx-auto text-sm sm:text-base text-ecv-grayText">
+      Informações sobre os processos relacionados ao
+      <strong>Esporte Clube Vitória</strong> e à <strong>Vitória S/A</strong>.
+    </p>
+  </section>
+
+  <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+    <div class="bg-ecv-cardBg p-6 rounded-2xl border border-ecv-red/40 glow-red">
+      <div class="text-xs uppercase font-bold tracking-wider text-ecv-grayText flex justify-between">
+        <span>Valores da relação</span>
+        <i class="fa-solid fa-sack-dollar text-ecv-red"></i>
+      </div>
+      <div id="cardTotalDebt" class="text-2xl sm:text-3xl font-black my-2">
+        R$ 73.904.214,88
+      </div>
+      <p id="cardTotalCount" class="text-xs text-ecv-grayText">
+        102 processos relacionados
+      </p>
+    </div>
+
+    <div class="bg-ecv-cardBg p-6 rounded-2xl border border-ecv-border">
+      <div class="flex justify-between gap-2 text-xs uppercase font-bold text-blue-400">
+        <span>Conhecimento</span>
+        <span id="countConhecimento"></span>
+      </div>
+      <div id="valueConhecimento" class="text-2xl font-black my-2"></div>
+      <div class="w-full bg-gray-800 h-1.5 rounded-full mt-3 overflow-hidden">
+        <div id="barConhecimento" class="bg-blue-500 h-full"></div>
+      </div>
+      <p id="percentConhecimento" class="text-[11px] text-ecv-grayText mt-2"></p>
+    </div>
+
+    <div class="bg-ecv-cardBg p-6 rounded-2xl border border-ecv-border">
+      <div class="flex justify-between gap-2 text-xs uppercase font-bold text-ecv-red">
+        <span>Execução</span>
+        <span id="countExecucao"></span>
+      </div>
+      <div id="valueExecucao" class="text-2xl font-black my-2"></div>
+      <div class="w-full bg-gray-800 h-1.5 rounded-full mt-3 overflow-hidden">
+        <div id="barExecucao" class="bg-ecv-red h-full"></div>
+      </div>
+      <p id="percentExecucao" class="text-[11px] text-ecv-grayText mt-2"></p>
+    </div>
+
+    <div class="bg-ecv-cardBg p-6 rounded-2xl border border-ecv-border">
+      <div class="flex justify-between gap-2 text-xs uppercase font-bold text-ecv-gold">
+        <span>Liquidação</span>
+        <span id="countLiquidacao"></span>
+      </div>
+      <div id="valueLiquidacao" class="text-2xl font-black my-2"></div>
+      <div class="w-full bg-gray-800 h-1.5 rounded-full mt-3 overflow-hidden">
+        <div id="barLiquidacao" class="bg-ecv-gold h-full"></div>
+      </div>
+      <p id="percentLiquidacao" class="text-[11px] text-ecv-grayText mt-2"></p>
+    </div>
+
+  </section>
+
+  <section class="bg-ecv-cardBg rounded-2xl p-6 sm:p-8 border border-ecv-border space-y-6">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-ecv-border pb-5">
+      <div>
+        <h3 class="text-xl sm:text-2xl font-bold">
+          <i class="fa-solid fa-graduation-cap text-ecv-gold mr-2"></i>
+          Guia Prático para o Torcedor
+        </h3>
+        <p class="text-xs sm:text-sm text-ecv-grayText mt-1">
+          Nome esportivo, saída do clube e gestão em exercício naquele momento.
+        </p>
+      </div>
+
+      <div class="bg-ecv-black px-4 py-2 rounded-xl border border-ecv-border text-xs text-ecv-gold">
+        Ano da ação ≠ ano da saída
+      </div>
+    </div>
+
+    <div class="bg-ecv-black p-5 rounded-xl border border-ecv-border text-sm text-ecv-grayText space-y-3">
+      <p>
+        <strong class="text-white">Critério: saída do clube.</strong>
+        A coluna “Ano da ação” mantém o ano do processo.
+        A gestão corresponde à saída registrada e não determina a responsabilidade pela dívida.
+      </p>
+
+      <p>
+        Quando apenas o mês ou o ano foi identificado, essa precisão é mantida.
+        Empréstimos aparecem sinalizados. Wallace e Dinei têm múltiplas passagens,
+        explicadas nos detalhes de seus registros.
+      </p>
+
+      <p>
+        “Não apurada” indica informação ainda não preenchida.
+        A relação também inclui funcionários, entidades e um processo em que o Vitória é credor.
+      </p>
+
+      <p class="text-xs">
+        Fábio Mota assumiu em outubro de 2021.
+        Entre setembro e outubro daquele ano, Luiz Henrique Viana exerceu a presidência.
+        Dezembro de 2016 também teve mudança de gestão.
+      </p>
+
+      <p id="researchCoverage" class="text-xs"></p>
+    </div>
+
+    <div>
+      <span class="text-xs font-bold text-ecv-grayText uppercase tracking-wider block mb-3">
+        <i class="fa-solid fa-star text-ecv-gold mr-1"></i>
+        Filtro rápido por nome
+      </span>
+      <div id="quickFilterBadges" class="flex flex-wrap gap-2"></div>
+    </div>
+  </section>
+
+  <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="bg-ecv-cardBg p-6 rounded-2xl border border-ecv-border">
+      <h3 class="text-lg font-bold mb-1">
+        <i class="fa-solid fa-chart-pie text-ecv-red mr-2"></i>
+        Valores por gestão na saída
+      </h3>
+      <p class="text-xs text-ecv-grayText mb-4">
+        Processos agrupados pela saída registrada. Casos não apurados e múltiplas passagens ficam separados.
+      </p>
+      <div class="relative h-80">
+        <canvas id="managementChart"></canvas>
+      </div>
+    </div>
+
+    <div class="bg-ecv-cardBg p-6 rounded-2xl border border-ecv-border">
+      <h3 class="text-lg font-bold mb-1">
+        <i class="fa-solid fa-chart-bar text-ecv-gold mr-2"></i>
+        Maiores credores unificados
+      </h3>
+      <p class="text-xs text-ecv-grayText mb-4">
+        Seis maiores somas por credor. Processos distintos não representam necessariamente dívidas independentes.
+      </p>
+      <div class="relative h-80">
+        <canvas id="topCreditorsChart"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-ecv-cardBg rounded-2xl border border-ecv-border overflow-hidden shadow-2xl">
+    <div class="p-6 border-b border-ecv-border space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h3 class="text-xl font-extrabold">
+            <i class="fa-solid fa-list-check text-ecv-red mr-2"></i>
+            Lista de credores
+          </h3>
+          <p class="text-xs text-ecv-grayText mt-1">
+            Busque por nome esportivo ou completo, advogado, processo ou saída.
+            Abra os detalhes para consultar as fontes.
+          </p>
         </div>
-    </header>
 
-    <!-- Main Content Container -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10 w-full">
-
-        <!-- Hero Title Section -->
-        <div class="text-center space-y-3">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-ecv-red/10 border border-ecv-red/30 text-ecv-red text-xs sm:text-sm font-semibold">
-                <i class="fa-solid fa-shield-halved">
-</i> Procedimento de Reunião de Execução (RTR)
-            </div>
-            <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight">
-                Painel do Torcedor: <span class="text-transparent bg-clip-text bg-gradient-to-r from-ecv-red via-red-500 to-ecv-gold">Credores Trabalhistas</span>
-            </h2>
-            <p class="max-w-3xl mx-auto text-sm sm:text-base text-ecv-grayText">
-                Informativo detalhado e transparente para a torcida sobre o passivo trabalhista unificado do <strong>Esporte Clube Vitória</strong> e <strong>Vitória S/A</strong>.
-            </p>
+        <div class="flex items-center gap-2">
+          <button id="btnResetFilters" class="px-3 py-2 bg-ecv-black hover:bg-ecv-border rounded-lg text-xs font-semibold border border-ecv-border">
+            <i class="fa-solid fa-rotate-left mr-1"></i>
+            Limpar filtros
+          </button>
+          <span id="recordsCount" class="text-xs bg-ecv-red/20 text-ecv-red border border-ecv-red/30 px-3 py-2 rounded-lg font-bold"></span>
         </div>
+      </div>
 
-        <!-- Summary Metric Cards -->
-        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            <!-- Total Debt Card -->
-            <div class="bg-ecv-cardBg p-6 rounded-2xl border border-ecv-red/40 relative overflow-hidden glow-red group hover:border-ecv-red transition-all">
-                <div class="absolute -right-4 -bottom-4 text-ecv-red/10 text-8xl font-black group-hover:scale-110 transition-transform">R$</div>
-                <div class="text-xs uppercase font-bold tracking-wider text-ecv-grayText mb-1 flex items-center justify-between">
-                    <span>Dívida Total Reunida</span>
-                    <i class="fa-solid fa-sack-dollar text-ecv-red text-base">
-</i>
-                </div>
-                <div class="text-2xl sm:text-3xl font-black text-white tracking-tight my-1" id="cardTotalDebt">
-                    R$ 73.904.214,88
-                </div>
-                <p class="text-xs text-ecv-grayText">102 Processos Trabalhistas no TRT-5</p>
-            </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <input
+          id="searchInput"
+          type="search"
+          aria-label="Buscar registros"
+          placeholder="Nome, processo, advogado, saída..."
+          class="w-full bg-ecv-black border border-ecv-border rounded-xl px-3 py-2.5 text-xs focus:outline-none focus:border-ecv-red"
+        >
 
-            <!-- Conhecimento Card -->
-            <div class="bg-ecv-cardBg p-6 rounded-2xl border border-ecv-border hover:border-blue-500/50 transition-all">
-                <div class="text-xs uppercase font-bold tracking-wider text-blue-400 mb-1 flex items-center justify-between">
-                    <span>Fase de Conhecimento</span>
-                    <span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 text-xs font-bold">30 Ações</span>
-                </div>
-                <div class="text-2xl font-black text-white tracking-tight my-1">
-                    R$ 26.445.164,08
-                </div>
-                <div class="w-full bg-gray-800 h-1.5 rounded-full mt-3 overflow-hidden">
-                    <div class="bg-blue-500 h-full" style="width: 35.8%">
-</div>
-                </div>
-                <p class="text-[11px] text-ecv-grayText mt-2">35.8% do passivo total em discussão</p>
-            </div>
+        <select id="phaseFilter" aria-label="Filtrar por fase" class="w-full bg-ecv-black border border-ecv-border rounded-xl px-3 py-2.5 text-xs">
+          <option value="">Todas as fases</option>
+          <option>Conhecimento</option>
+          <option>Execução</option>
+          <option>Liquidação</option>
+        </select>
 
-            <!-- Execução Card -->
-            <div class="bg-ecv-cardBg p-6 rounded-2xl border border-ecv-border hover:border-ecv-red/50 transition-all">
-                <div class="text-xs uppercase font-bold tracking-wider text-ecv-red mb-1 flex items-center justify-between">
-                    <span>Fase de Execução</span>
-                    <span class="px-2 py-0.5 rounded bg-ecv-red/20 text-ecv-red text-xs font-bold">53 Ações</span>
-                </div>
-                <div class="text-2xl font-black text-white tracking-tight my-1">
-                    R$ 30.485.756,73
-                </div>
-                <div class="w-full bg-gray-800 h-1.5 rounded-full mt-3 overflow-hidden">
-                    <div class="bg-ecv-red h-full" style="width: 41.2%">
-</div>
-                </div>
-                <p class="text-[11px] text-ecv-grayText mt-2">41.2% com cobrança/execução ativa</p>
-            </div>
+        <select id="eraFilter" aria-label="Filtrar por gestão na saída" class="w-full bg-ecv-black border border-ecv-border rounded-xl px-3 py-2.5 text-xs">
+          <option value="">Todas as gestões na saída</option>
+        </select>
 
-            <!-- Liquidação Card -->
-            <div class="bg-ecv-cardBg p-6 rounded-2xl border border-ecv-border hover:border-ecv-gold/50 transition-all">
-                <div class="text-xs uppercase font-bold tracking-wider text-ecv-gold mb-1 flex items-center justify-between">
-                    <span>Fase de Liquidação</span>
-                    <span class="px-2 py-0.5 rounded bg-ecv-gold/20 text-ecv-gold text-xs font-bold">19 Ações</span>
-                </div>
-                <div class="text-2xl font-black text-white tracking-tight my-1">
-                    R$ 16.973.294,07
-                </div>
-                <div class="w-full bg-gray-800 h-1.5 rounded-full mt-3 overflow-hidden">
-                    <div class="bg-ecv-gold h-full" style="width: 23.0%">
-</div>
-                </div>
-                <p class="text-[11px] text-ecv-grayText mt-2">23.0% em apuração final de valores</p>
-            </div>
-        </section>
+        <select id="yearFilter" aria-label="Filtrar pelo ano da ação" class="w-full bg-ecv-black border border-ecv-border rounded-xl px-3 py-2.5 text-xs">
+          <option value="">Todos os anos da ação</option>
+        </select>
+      </div>
+    </div>
 
-        <!-- Educational Guide for Fans -->
-        <section class="bg-ecv-cardBg rounded-2xl p-6 sm:p-8 border border-ecv-border space-y-6">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-ecv-border pb-5">
-                <div>
-                    <h3 class="text-xl sm:text-2xl font-bold text-white flex items-center gap-2">
-                        <i class="fa-solid fa-graduation-cap text-ecv-gold">
-</i> Guia Prático para o Torcedor Rubro-Negro
-                    </h3>
-                    <p class="text-xs sm:text-sm text-ecv-grayText mt-1">
-                        Entenda como funciona a identificação do ano da ação judicial e a qual gestão ela pertence.
-                    </p>
-                </div>
-                <div class="bg-ecv-black px-4 py-2 rounded-xl border border-ecv-border text-xs text-ecv-gold font-mono">
-                    Exemplo CNJ: 0000002-78.<strong class="underline text-white">2013</strong>.5.05.0024 &rarr; <span class="text-green-400">Ano: 2013</span>
-                </div>
-            </div>
+    <div class="overflow-x-auto">
+      <table class="w-full text-left text-xs text-gray-300">
+        <thead class="bg-ecv-black text-ecv-grayText uppercase text-[11px] tracking-wider">
+          <tr>
+            <th scope="col" class="py-3.5 px-4">#</th>
+            <th scope="col" class="py-3.5 px-4">
+              <button id="sortCredor" class="font-bold text-white">
+                Credor / Parte <i class="fa-solid fa-sort ml-1"></i>
+              </button>
+            </th>
+            <th scope="col" class="py-3.5 px-4 text-right">
+              <button id="sortValor" class="font-bold text-white">
+                Valor (R$) <i class="fa-solid fa-sort ml-1"></i>
+              </button>
+            </th>
+            <th scope="col" class="py-3.5 px-4 text-center">Ano da ação</th>
+            <th scope="col" class="py-3.5 px-4">Saída do Vitória</th>
+            <th scope="col" class="py-3.5 px-4">Gestão na saída</th>
+            <th scope="col" class="py-3.5 px-4">Fase</th>
+            <th scope="col" class="py-3.5 px-4">Nº do processo</th>
+            <th scope="col" class="py-3.5 px-4">Advogado(s)</th>
+          </tr>
+        </thead>
+        <tbody id="creditorsTableBody" class="divide-y divide-ecv-border/50"></tbody>
+      </table>
+    </div>
 
-            <!-- Timeline of Managements -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div class="bg-ecv-black p-4 rounded-xl border border-ecv-border space-y-2">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-ecv-gold uppercase">Até 2016</span>
-                        <i class="fa-solid fa-users text-ecv-grayText text-xs">
-</i>
-                    </div>
-                    <h4 class="font-extrabold text-white text-sm">Alexi Portela / Falcão / R. Viana</h4>
-                    <p class="text-xs text-ecv-grayText">Processos ajuizados até o término da gestão de Raimundo Viana no final de 2016.</p>
-                </div>
+    <div class="p-4 bg-ecv-black border-t border-ecv-border flex flex-col sm:flex-row items-center justify-between text-xs text-ecv-grayText gap-2">
+      <div>
+        Soma dos itens filtrados:
+        <strong id="filteredSumText" class="text-ecv-gold text-sm"></strong>
+      </div>
+      <div>
+        Exibindo <span id="visibleCount" class="text-white"></span>
+        de <span id="totalCount" class="text-white"></span> processos
+      </div>
+    </div>
+  </section>
+</main>
 
-                <div class="bg-ecv-black p-4 rounded-xl border border-ecv-border space-y-2">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-ecv-gold uppercase">2017 – 2018</span>
-                        <i class="fa-solid fa-users text-ecv-grayText text-xs">
-</i>
-                    </div>
-                    <h4 class="font-extrabold text-white text-sm">Ivã de Almeida / Ricardo David</h4>
-                    <p class="text-xs text-ecv-grayText">Período de transição política rápida, renúncias e troca de mandatários.</p>
-                </div>
+<footer class="bg-ecv-black border-t border-ecv-border mt-12 py-6 text-center text-xs text-ecv-grayText">
+  <div class="max-w-7xl mx-auto px-4 space-y-2">
+    <p class="font-semibold text-white">Portal Informativo — Transparência Rubro-Negra</p>
+    <p>
+      Fonte dos valores e partes: Tribunal Regional do Trabalho da 5ª Região.
+      Processo 0000580-54.2025.5.05.0013. Extração: 08/10/2026.
+    </p>
+    <p>
+      Nomes e saídas: fontes indicadas nos registros e informações fornecidas por Ítalo Oliveira.
+      A gestão corresponde ao momento da saída.
+    </p>
+    <p class="text-[10px] text-gray-500">
+      Os valores incluem o processo 95, de R$ 12.167,78, em que o Vitória figura como credor.
+      O painel conserva a soma da relação original.
+    </p>
+  </div>
+</footer>
 
-                <div class="bg-ecv-black p-4 rounded-xl border border-ecv-border space-y-2">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-ecv-gold uppercase">2019 – 2021</span>
-                        <i class="fa-solid fa-users text-ecv-grayText text-xs">
-</i>
-                    </div>
-                    <h4 class="font-extrabold text-white text-sm">Gestão Paulo Carneiro</h4>
-                    <p class="text-xs text-ecv-grayText">Período marcado pela pandemia de COVID-19, reestruturação e crise financeira.</p>
-                </div>
+<script>
+"use strict";
 
-                <div class="bg-ecv-black p-4 rounded-xl border border-ecv-border space-y-2 border-ecv-red/50">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-ecv-red uppercase">2022 – Atual (2026)</span>
-                        <i class="fa-solid fa-shield-halved text-ecv-red text-xs">
-</i>
-                    </div>
-                    <h4 class="font-extrabold text-white text-sm">Gestão Fábio Mota</h4>
-                    <p class="text-xs text-ecv-grayText">Período de reestruturação judicial via Procedimento de Reunião de Execuções no TRT-5.</p>
-                </div>
-            </div>
+/*
+Cada linha contém:
+[id, nome completo, nome esportivo, valor, fase, processo, advogado, saída, gestão]
 
-            <!-- Famous Creditors Quick Badges -->
-            <div class="pt-2">
-                <span class="text-xs font-bold text-ecv-grayText uppercase tracking-wider block mb-2">
-                    <i class="fa-solid fa-star text-ecv-gold mr-1">
-</i> Filtro Rápido - Figuras Conhecidas da Torcida:
-                </span>
-                <div class="flex flex-wrap gap-2" id="quickFilterBadges">
-                    <!-- Badges injected via JS -->
-                </div>
-            </div>
-        </section>
+Fases:
+C = Conhecimento
+E = Execução
+L = Liquidação
 
-        <!-- Charts Grid Section -->
-        <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <!-- Management Chart -->
-            <div class="bg-ecv-cardBg p-6 rounded-2xl border border-ecv-border flex flex-col justify-between">
-                <div>
-                    <h3 class="text-lg font-bold text-white flex items-center gap-2 mb-1">
-                        <i class="fa-solid fa-chart-pie text-ecv-red">
-</i> Dívida por Gestão de Ajuizamento
-                    </h3>
-                    <p class="text-xs text-ecv-grayText mb-4">Volume financeiro acumulado por período da ação judicial iniciada</p>
-                </div>
-                <div class="relative h-64 w-full flex items-center justify-center">
-                    <canvas id="managementChart">
-</canvas>
-                </div>
-            </div>
+Nome esportivo, saída e gestão vazios indicam informações ainda não apuradas.
+*/
+const registros = [
+[1,"CLEBER SCHWENCK TIENE","Schwenck",100000.00,"E","0000002-78.2013.5.05.0024","LEONARDO LAPORTA COSTA","Fim de 2010","Alexi Portela"],
+[2,"KENNEDY SILVA SAMPAIO","Kennedy",134007.70,"C","0000010-80.2026.5.05.0030","MATHEUS AUGUSTO MEINERTZ","2024","Fábio Mota"],
+[3,"LUCAS BRAGA RIBEIRO","Lucas Braga",6916263.78,"C","0000014-56.2026.5.05.0018","ARNALDO DE SOUZA RAMOS JUNIOR","20/02/2026","Fábio Mota"],
+[4,"EWANDRO FELIPE DE LIMA COSTA","Ewandro",561133.89,"E","0000037-95.2023.5.05.0021","RIURY ALVES BARBOSA VIEIRA","Início de 2021","Paulo Carneiro"],
+[5,"WR15 MARKETING ESPORTIVO LTDA e outros","",910000.00,"L","0000049-10.2026.5.05.0020","THIAGO DE SOUZA RINO e outros","",""],
+[6,"MARCOS AURELIO FERNANDES DA SILVA","Marcos Aurélio",2121893.03,"E","0000060-06.2021.5.05.0023","FABIO EUSTAQUIO DA CRUZ","2009","Alexi Portela"],
+[7,"ADRIEL NERES DA FONSECA","",12878.16,"C","0000062-97.2026.5.05.0023","IAGO GONCALVES BATISTA","",""],
+[8,"RICARDO PALMEIRA GOMES DE OLIVEIRA","",55105.07,"C","0000070-04.2026.5.05.0014","WILLIAM WALTER SANTOS JUNIOR","",""],
+[9,"WALLACE REIS SILVA","Wallace",2050030.81,"L","0000073-34.2019.5.05.0036","ALAN BELACIANO","25/01/2018; jan/2022; 04/01/2023","Múltiplas passagens"],
+[10,"LUCAS CANDIDO SILVA","Lucas Cândido",347321.66,"E","0000105-98.2021.5.05.0026","FERNANDO MARCIO CRUZ","Início de 2021","Paulo Carneiro"],
+[11,"WELLISSON DA CONCEICAO FERREIRA","Welisson",272600.00,"E","0000116-88.2021.5.05.0039","MAURICIO COSTA FERNANDES DA CUNHA","Jul/2021","Paulo Carneiro"],
+[12,"CLEVERTON MATHEUS DA LUZ TENORIO","Matheus Tenório",157359.82,"E","0000119-91.2025.5.05.0010","PRISCILLA ITANA LEDO LAGO","30/04/2023","Fábio Mota"],
+[13,"UELLITON DA SILVA VIEIRA","Uelliton",80000.00,"L","0000131-51.2020.5.05.0020","MANOELA CARVALHO GARCIA e outros","31/12/2012","Alexi Portela"],
+[14,"WANDERSON PAPATERRA MATOS","Papaterra",16415.95,"C","0000140-21.2026.5.05.0014","AMANDA XAVIER SOUZA e outros","2025","Fábio Mota"],
+[15,"WALLACE REIS SILVA","Wallace",5682040.18,"E","0000148-95.2022.5.05.0027","IGOR CAZARINI SEVALLI e outros","25/01/2018; jan/2022; 04/01/2023","Múltiplas passagens"],
+[16,"GUSTAVO HENRIC DA SILVA","Gustavo Mosquito",221814.86,"L","0000165-58.2026.5.05.0006","LEONARDO LAPORTA COSTA","05/07/2025","Fábio Mota"],
+[17,"MARCOS AURELIO FERNANDES DA SILVA","Marcos Aurélio",1195224.75,"E","0000175-13.2010.5.05.0023","FABIO EUSTAQUIO DA CRUZ","2009","Alexi Portela"],
+[18,"EMERSON ORLANDO MELO","",454132.56,"E","0000176-38.2023.5.05.0024","MARCUS VILLA COSTA","",""],
+[19,"JOAO GABRIEL SILVA TELES","João Gabriel",1038640.14,"E","0000192-29.2021.5.05.0002","RAYANNA GABRIELA MACHADO SILVA e outros","06/05/2021","Paulo Carneiro"],
+[20,"SIND DOS EMPR ENTID CULT REC A SOC ORI FOR PR EST DA BA","",52080.00,"L","0000204-42.2023.5.05.0012","ANTONIO CARLOS DE FIGUEIREDO SOUZA","",""],
+[21,"JOSE OLIMPIO NEVES AZEVEDO","",518908.21,"E","0000245-86.2021.5.05.0009","JAMIL CABUS NETO","",""],
+[22,"HUGO LEONARDO ALVES DA SILVA","Hugo",95338.47,"L","0000246-53.2026.5.05.0023","LARYSSA STEPHANE SILVA SANTOS","2025","Fábio Mota"],
+[23,"LUIZ FELIPE PINTO OLIVEIRA DA MOTTA","",108300.00,"C","0000248-87.2025.5.05.0013","MARIA ALICE OLIVEIRA MENEZES","",""],
+[24,"CESAR AUGUSTO SOARES DOS REIS RIBELA","César",370480.84,"E","0000254-35.2022.5.05.0002","ALEXANDRE OLIVEIRA AZEVEDO DOS SANTOS","Fev/2021","Paulo Carneiro"],
+[25,"MAURICIO DONIZETI RAMOS JUNIOR","Maurício Ramos",993007.13,"E","0000256-85.2021.5.05.0019","JOAO LUIZ FURTADO","01/03/2021","Paulo Carneiro"],
+[26,"PABLO FARIA LIMA","",40240.45,"E","0000262-60.2024.5.05.0028","LUDIMILA DE PAULA GOMES e outros","",""],
+[27,"NATHALIA CARVALHO DE FIGUEIREDO","",437966.39,"E","0000265-74.2022.5.05.0031","GILDERSON BARROS VIEIRA e outros","",""],
+[28,"TELMARIO DE ARAUJO SACRAMENTO","Dinei",9486522.25,"C","0000273-54.2017.5.05.0022","THEREZA CRISTINA CARNEIRO GONCALVES BEZERRA SILVA","31/12/2014; fim da Série C/2022","Múltiplas passagens"],
+[29,"ALESSANDRO BASILIO DE ANDRADE","",24317.18,"E","0000286-84.2025.5.05.0018","RAFAELA MACHADO AMADOR e outros","",""],
+[30,"EDVALDO DA SILVA RIBEIRO","",20103.04,"E","0000298-83.2024.5.05.0002","IONARA DE MATOS SOARES RIBEIRO","",""],
+[31,"BRUNO UVINI BORTOLANCA","Bruno Uvini",5755475.84,"L","0000299-92.2025.5.05.0015","JOAO HENRIQUE CREN CHIMINAZZO","Jun/2025","Fábio Mota"],
+[32,"CAIO VINICIUS DA CONCEICAO","Caio Vinícius",116464.00,"L","0000301-59.2026.5.05.0037","JOAO HENRIQUE DE AGUIAR","03/03/2025","Fábio Mota"],
+[33,"BRUNO MARQUES FERNANDES PIVETTI","Bruno Pivetti",56724.66,"E","0000314-49.2021.5.05.0032","JOAO HENRIQUE CREN CHIMINAZZO","07/10/2020","Paulo Carneiro"],
+[34,"PABLO FABRICIO SILES MORALES","Pablo Siles",162112.84,"L","0000319-51.2023.5.05.0016","HENRIQUE RICHTER CARON e outros","Out/2021","Luiz Henrique Viana / Fábio Mota"],
+[35,"JACKSON LIMA DOS SANTOS SOUZA","",130186.35,"C","0000327-90.2026.5.05.0026","EDILENE ROCHA DE JESUS","",""],
+[36,"EDUARDO DE SOUZA BARROCA","Eduardo Barroca",566537.53,"E","0000361-37.2022.5.05.0016","CARLOS EDUARDO AMBIEL e outros","27/11/2020","Paulo Carneiro"],
+[37,"LUIS FILIPE DANEU FERNANDES","",87997.13,"E","0000368-33.2021.5.05.0026","JAMIL CABUS NETO","",""],
+[38,"JONATHAN FERREIRA DA SILVA","Jonathan Bocão",396524.10,"E","0000371-45.2022.5.05.0028","MARCIO FELIPE BUZALAF e outros","Início de 2021","Paulo Carneiro"],
+[39,"ANDRE LUIZ BARRETTO SILVA LIMA","André Lima",757499.99,"E","0000374-31.2020.5.05.0008","PABLO TRONCOSO OLIVEIRA","Fim de 2018","Ricardo David"],
+[40,"MILENA RODRIGUES MATOS","",106994.98,"L","0000374-69.2023.5.05.0026","LUANDA OLIVEIRA RODRIGUES e outros","",""],
+[41,"RODRIGO VASCO DA GAMA NETO","",543545.89,"E","0000378-04.2022.5.05.0039","JAMIL CABUS NETO","",""],
+[42,"JANDERSON DE CARVALHO COSTA","Janderson",59677.18,"L","0000388-11.2026.5.05.0006","DIOGO LIMA DE SOUZA","Jun/2025","Fábio Mota"],
+[43,"SINDICATO DOS ATLETAS PROFISSIONAIS DO EST DA BAHIA","",1000000.00,"C","0000408-06.2016.5.05.0021","RONALDO VIEIRA PASSOS e outros","",""],
+[44,"DANKLER LUIS DE JESUS PEDREIRA","Dankler",473406.31,"E","0000411-78.2023.5.05.0032","ANANDA JORGE MATTOS e outros","20/04/2023","Fábio Mota"],
+[45,"HUMBERTO MIGUEL DA SILVA CLARA","",37258.37,"E","0000414-83.2021.5.05.0038","CARLOS ROBERTO TUDE DE CERQUEIRA e outros","",""],
+[46,"ANDRE LUIS VERAS NEPOMUCENO DA SILVA JUNIOR","",61673.71,"L","0000446-53.2022.5.05.0006","ERIKA CAVALCANTE GAMA e outros","",""],
+[47,"MAURICIO PLENCKAUSKAS CORDEIRO","Maurício Cordeiro",373350.81,"E","0000452-44.2020.5.05.0034","RAFAEL ZIPPIN KNIJNIK","25/06/2019","Paulo Carneiro"],
+[48,"JOSE DE SOUZA RUVENAL NETO","",300216.40,"C","0000455-49.2026.5.05.0014","ELISEU SOARES PATROCINIO FILHO","",""],
+[49,"EDSON GONCALVES VILAS BOAS","",345368.59,"E","0000468-94.2021.5.05.0023","JAMIL CABUS NETO","",""],
+[50,"KAMILA SANTOS DE LIMA","",4559.44,"C","0000494-61.2026.5.05.0009","HIGOR MARCELO MAFFEI BELLINI","",""],
+[51,"JULIO CESAR BARBOSA SACRAMENTO","",218337.03,"L","0000514-04.2026.5.05.0025","SERGIO FERREIRA DOS SANTOS e outros","",""],
+[52,"RAMON MENEZES ROMA","Ramon",694373.92,"E","0000521-33.2021.5.05.0037","FERNANDA SAADE MALAQUIAS DE CASTRO","Fim de 2019","Paulo Carneiro"],
+[53,"SIRLANDRO PEREIRA SANTANA","",65000.00,"C","0000528-33.2026.5.05.0010","YURI MOURA RIBEIRO DE SA e outros","",""],
+[54,"CARLOS EDUARDO DE CAMPOS DE OLIVEIRA e outros","",84689.52,"E","0000535-88.2022.5.05.0002","POLIANA BEORDO NICOLETI","",""],
+[55,"SILVIO DE JESUS FERREIRA","",71742.98,"C","0000543-84.2026.5.05.0015","BRUNO DO AMOR DIVINO DOS SANTOS","",""],
+[56,"ALISSON ALVES FARIAS","Alisson Farias",1051921.31,"E","0000547-90.2023.5.05.0027","ANDRE OLIVEIRA DE MEIRA RIBEIRO","2022","Fábio Mota"],
+[57,"YAGO FELIPE DA COSTA ROCHA","Yago Felipe",435185.55,"L","0000553-17.2020.5.05.0023","EDUARDO BEIL e outros","17/01/2020","Paulo Carneiro"],
+[58,"LEONARDO DE SOUSA PEREIRA","Léo Ceará",295425.36,"L","0000571-49.2021.5.05.0008","MAURICIO COSTA FERNANDES DA CUNHA e outros","Jan/2021","Paulo Carneiro"],
+[59,"CASSIMIRO FERREIRA DE ANDRADE","",31585.33,"L","0000575-44.2026.5.05.0030","FILIPI BITTI ELER","",""],
+[60,"RUY FRANCO DE ALMEIDA JUNIOR","Ruy",801162.81,"E","0000576-56.2021.5.05.0013","RODRIGO PUPPI BASTOS","Fim de 2019","Paulo Carneiro"],
+[61,"COMISSAO DE CREDORES","",1.00,"E","0000580-54.2025.5.05.0013","WASHINGTON SANTANA SANTOS e outros","",""],
+[62,"VINICIUS DUARTE","Vico",832294.14,"E","0000602-33.2021.5.05.0020","THIAGO DE SOUZA RINO e outros","Fim de 2021","Fábio Mota"],
+[63,"GUILHERME COSTA MACHADO SILVEIRA","Guilherme Costa",668497.67,"E","0000621-65.2019.5.05.0034","RUY JOAO RIBEIRO GONCALVES JUNIOR","Fim de 2018","Ricardo David"],
+[64,"VINICIUS DE SOUZA NOGUEIRA","",12052.00,"C","0000624-97.2026.5.05.0026","MARCELO SANTOS LEITAO","",""],
+[65,"WALTER HENRIQUE DA SILVA","Walter",11740.53,"E","0000626-91.2021.5.05.0010","ROBSON DA SILVA ALVES TERTO","13/04/2021","Paulo Carneiro"],
+[66,"NICKSON GABRIEL REIS SILVA","Nickson",986100.92,"E","0000638-21.2020.5.05.0017","VICTOR DOS ANJOS CORDEIRO","06/08/2021","Paulo Carneiro"],
+[67,"ISMAEL SOARES BASTOS NETO","Neto Coruja",493472.69,"E","0000676-02.2017.5.05.0029","THIAGO DE SOUZA RINO e outros","30/06/2015","Raimundo Viana"],
+[68,"PABLO GABRIEL SOUSA ALVES","Pablo",398281.97,"E","0000682-12.2022.5.05.0036","ROBERTO NICOLAU SCHORR JUNIOR e outros","Mai/2022","Fábio Mota"],
+[69,"DANIEL CAIOBA JOSE DOS SANTOS","",180024.03,"E","0000683-54.2022.5.05.0017","SAULO NOBREGA RIBEIRO CHAVES","",""],
+[70,"RODRIGO SANTOS DA SILVA","",46917.17,"C","0000689-05.2025.5.05.0034","RAFAELA MACHADO AMADOR e outros","",""],
+[71,"JADSON RODRIGUES DA SILVA","Jadson",448000.70,"E","0000697-38.2022.5.05.0017","JOAO HENRIQUE DE AGUIAR e outros","Mai/2022","Fábio Mota"],
+[72,"FELIPE CARDOSO","Felipe Cardoso",398058.06,"C","0000708-52.2026.5.05.0009","THIAGO DE SOUZA RINO e outros","Fev/2026","Fábio Mota"],
+[73,"LUAN SILVA DOS SANTOS","Luan Silva",212515.46,"E","0000734-16.2023.5.05.0022","FABIO EUSTAQUIO DA CRUZ","Abr/2023","Fábio Mota"],
+[74,"EDNES SIDREIRA DA SILVA","",150394.15,"C","0000746-22.2022.5.05.0133","GABRIEL ARAUJO LACERDA e outros","",""],
+[75,"ROGER DE CARVALHO","Roger Carvalho",322546.30,"E","0000752-82.2015.5.05.0033","FILIPE ORSOLINI PINTO DE SOUZA","Dez/2014","Carlos Falcão"],
+[76,"FABIANO DA SILVA SOUZA","Fabiano",727558.46,"E","0000762-60.2022.5.05.0008","WESLEI MATOS DE OLIVEIRA","2021","Paulo Carneiro"],
+[77,"MICHEL AGUIAR DOS SANTOS","",403062.33,"C","0000784-20.2024.5.05.0018","INGO SA HAGE CALABRICH","",""],
+[78,"LUIZ ALCIDES PEREIRA CONCEICAO","",639946.38,"C","0000821-13.2025.5.05.0018","INGO SA HAGE CALABRICH","",""],
+[79,"HUGO GONCALVES FERREIRA NETO","Hugo",530824.10,"E","0000823-13.2025.5.05.0008","CLAUDIO KLEMENT RODRIGUES","03/06/2025","Fábio Mota"],
+[80,"ALISSON SOARES DE ALMEIDA","",82494.88,"C","0000844-11.2025.5.05.0033","BRENO TILLON CACHOEIRA DANTAS","",""],
+[81,"THIAGO BESERRA SANTOS CONTI","Thiaguinho",220000.00,"E","0000864-02.2025.5.05.0033","THIAGO DE SOUZA RINO e outros","23/05/2025","Fábio Mota"],
+[82,"EDUARDO MARIANO DE OLIVEIRA","",94820.46,"C","0000877-80.2025.5.05.0039","FILIPE ORSOLINI PINTO DE SOUZA","",""],
+[83,"LUIZ HENRIQUE GOMES DE JESUS","",16868.44,"E","0000879-39.2023.5.05.0033","DANIELA SANTOS CRUZ","",""],
+[84,"JOSE AUGUSTO DOS SANTOS NETO","",23809.62,"E","0000892-19.2023.5.05.0007","FLAVIO FRANCA DALTRO e outros","",""],
+[85,"MARCIO ELOY SILVA LUZ","",2840.38,"C","0000905-26.2026.5.05.0035","FRANCISCO ABIEZEL RABELO DANTAS e outros","",""],
+[86,"JOAO MARCOS DA PAIXAO SILVESTRE","",65000.00,"C","0000918-30.2026.5.05.0001","YURI MOURA RIBEIRO DE SA e outros","",""],
+[87,"FERNANDA AMORIM DE ABREU","",4176448.39,"C","0000970-57.2026.5.05.0023","EDMILLE SANTOS SILVA e outros","",""],
+[88,"PATRIC BARBOSA FRAGA","",25355.20,"C","0001006-53.2026.5.05.0006","LUCAS SILVA DE OLIVEIRA","",""],
+[89,"CESAR CARVALHO MENDES","",689740.45,"C","0001011-82.2025.5.05.0015","MARIJU RAMOS MACIEL","",""],
+[90,"LEANDRO DA SILVA","Leandrinho",874637.45,"C","0001012-67.2025.5.05.0015","MARIJU RAMOS MACIEL","2009","Alexi Portela"],
+[91,"DENIS FARIA LUUP","",328915.39,"C","0001024-14.2025.5.05.0005","MARIJU RAMOS MACIEL","",""],
+[92,"VINICIUS MARTINS FRANCO","",141115.53,"C","0001027-14.2026.5.05.0011","MORENA CARVALHO COSTA","",""],
+[93,"LUIS FILIPE SANTANA BARBOSA DOS SANTOS","Luis Filipe",73917.67,"L","0001043-39.2025.5.05.0031","DIENEFER OLIVEIRA SANTOS e outros","2024","Fábio Mota"],
+[94,"UNIAO FEDERAL (PGFN)","",298539.73,"E","0001044-72.2025.5.05.0015","PROCURADORIA GERAL DA FAZENDA NACIONAL","",""],
+[95,"ESPORTE CLUBE VITORIA","",12167.78,"C","0001058-13.2026.5.05.0018","MARCELO ALEXANDRE ROCCO DA HORA SERRANO","",""],
+[96,"SEVERINO DO RAMO CLEMENTINO DA SILVA","Nino Paraíba",1454706.43,"E","0001090-36.2017.5.05.0017","LEONARDO LAPORTA COSTA","Abr/2015 (empréstimo)","Raimundo Viana"],
+[97,"TELMARIO DE ARAUJO SACRAMENTO","Dinei",6175562.96,"L","0001138-96.2025.5.05.0022","THEREZA CRISTINA CARNEIRO GONCALVES BEZERRA SILVA","31/12/2014; fim da Série C/2022","Múltiplas passagens"],
+[98,"ANA CARLA GONCALVES SOUZA","",71617.48,"L","0001174-56.2025.5.05.0017","PABLO FERREIRA FURTADO DE OLIVEIRA","",""],
+[99,"VERA LUCIA DA SILVA","",411682.11,"E","0001231-94.2017.5.05.0004","AURELIO PIRES e outros","",""],
+[100,"EDNEI BARBOSA DE SOUZA","Ednei",970968.45,"E","0001281-39.2016.5.05.0010","BEATRIZ MARIA RAMOS DE SOUZA e outros","Ago/2015","Raimundo Viana"],
+[101,"MAURICIO AZEVEDO ALVES","Amaral",669488.38,"E","0001376-41.2017.5.05.0008","ALAN BELACIANO","Dez/2016","Raimundo Viana / Ivã de Almeida"],
+[102,"JORGE ARESTIDES FREIRE SANDE","",2105.39,"E","0034500-06.2008.5.05.0016","VALMIR NOVAIS FREITAS","",""]
+];
 
-            <!-- Top Creditors Chart -->
-            <div class="bg-ecv-cardBg p-6 rounded-2xl border border-ecv-border flex flex-col justify-between">
-                <div>
-                    <h3 class="text-lg font-bold text-white flex items-center gap-2 mb-1">
-                        <i class="fa-solid fa-chart-bar text-ecv-gold">
-</i> Maiores Credores Unificados
-                    </h3>
-                    <p class="text-xs text-ecv-grayText mb-4">Top 6 maiores valores individuais/acumulados da lista</p>
-                </div>
-                <div class="relative h-64 w-full">
-                    <canvas id="topCreditorsChart">
-</canvas>
-                </div>
-            </div>
-        </section>
+/* Endereços reutilizados para evitar repetição. */
+const ge = caminho => "https://ge.globo.com/" + caminho;
+const bn = caminho => "https://www.bahianoticias.com.br/esportes/vitoria/" + caminho;
+const correio = caminho => "https://www.correio24horas.com.br/ec-vitoria/" + caminho;
 
-        <!-- Search and Main Table Section -->
-        <section class="bg-ecv-cardBg rounded-2xl border border-ecv-border overflow-hidden shadow-2xl space-y-4">
-            
-            <!-- Table Header Controls -->
-            <div class="p-6 border-b border-ecv-border space-y-4">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <div>
-                        <h3 class="text-xl font-extrabold text-white flex items-center gap-2">
-                            <i class="fa-solid fa-list-check text-ecv-red">
-</i> Lista Oficial de Credores
-                        </h3>
-                        <p class="text-xs text-ecv-grayText mt-0.5">Tabela completa com opção de busca por nome, número de processo ou advogado</p>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <button id="btnResetFilters" class="px-3 py-2 bg-ecv-black hover:bg-ecv-border text-ecv-grayText hover:text-white rounded-lg text-xs font-semibold transition-all border border-ecv-border flex items-center gap-1.5">
-                            <i class="fa-solid fa-rotate-left">
-</i> Limpar Filtros
-                        </button>
-                        <span class="text-xs bg-ecv-red/20 text-ecv-red border border-ecv-red/30 px-3 py-2 rounded-lg font-bold" id="recordsCount">
-                            102 Registros
-                        </span>
-                    </div>
-                </div>
+const fonte2021 = ge("ba/futebol/times/vitoria/noticia/reforcos-do-vitoria-veja-quem-chega-para-a-disputa-da-temporada-2021.ghtml");
+const fonte2018 = "https://atarde.com.br/esportes/esportesvitoria/saiba-a-situacao-dos-contratos-dos-jogadores-do-vitoria-1013421";
+const fonte2022 = ge("ba/futebol/times/vitoria/noticia/contratacoes-do-vitoria-para-2022-veja-quem-chega-quem-fica-e-quem-vai-embora-do-clube.ghtml");
 
-                <!-- Filters Row -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-2">
-                    <!-- Search Input -->
-                    <div class="relative">
-                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-ecv-grayText text-xs">
-</i>
-                        <input type="text" id="searchInput" placeholder="Buscar por credor, advogado..." class="w-full bg-ecv-black border border-ecv-border rounded-xl pl-9 pr-4 py-2.5 text-xs text-white placeholder-ecv-grayText focus:outline-none focus:border-ecv-red transition-all">
-                    </div>
+/*
+Detalhes complementares:
+[id, observação, fontes]
+*/
+const detalhes = new Map([
+[1,"Saiu para o Criciúma em 2011; dia de encerramento não confirmado.",[
+  "https://www.futeboldegoyaz.com.br/jogadores/1812/jogador"
+]],
+[2,"Nome esportivo e saída em 2024 informados por Ítalo Oliveira.",[]],
+[3,"Publicação da rescisão no BID. Sentença posterior reconheceu efeitos desde 14/01/2026. O HTML original havia trocado o credor pelo advogado.",[
+  "https://www.itatiaia.com.br/esportes/futebol/futebol-nacional/futebol-do-nordeste/vitoria/lucas-braga-rescinde-contrato-com-o-vitoria-e-fica-livre-no-mercado/",
+  "https://www.correio24horas.com.br/esportes/justica-reconhece-rescisao-indireta-de-lucas-braga-com-o-vitoria-apos-acao-por-atrasos-salariais-mas-nega-indenizacao-0926"
+]],
+[4,"Fim do empréstimo após a temporada 2020, disputada até janeiro de 2021. Dia exato não confirmado.",[
+  correio("contrato-chega-ao-fim-e-ewandro-se-despede-do-vitoria-0121")
+]],
+[6,"Nome usado e saída em 2009 informados por Ítalo Oliveira.",[]],
+[9,"Saída em 2018: Ricardo David. Empréstimo ao Brusque em janeiro de 2022 e rescisão definitiva em janeiro de 2023: Fábio Mota. Houve também saída para o Corinthians ao fim de 2010. Os dois processos não são automaticamente atribuídos à mesma passagem.",[
+  ge("ba/futebol/times/vitoria/noticia/2023/01/05/rescisao-de-contrato-de-wallace-com-o-vitoria-e-publicada-no-bid.ghtml"),
+  correio("wallace-nao-e-mais-jogador-do-vitoria-0118")
+]],
+[10,"Empréstimo encerrado após a temporada 2020; dia e mês exatos não confirmados.",[fonte2021]],
+[11,"Rescisão no BID noticiada em 22/07/2021. Não confundir com José Welison.",[
+  ge("ba/noticia/fora-dos-planos-lateral-direito-welisson-rescinde-contrato-com-o-vitoria.ghtml")
+]],
+[12,"",[
+  bn("26972-matheus-tenorio-rejeita-acordo-proposto-pelo-vitoria-e-segue-com-acao-contra-o-clube-na-justica")
+]],
+[13,"Fim do contrato. O atleta foi liberado antes do encerramento da temporada.",[
+  "https://www.bnews.com.br/noticias/esporte/48275-ricardo-silva-e-uelliton-fora-da-festa-do-vitoria.html"
+]],
+[14,"Nome usado e saída em 2025 informados por Ítalo Oliveira.",[]],
+[16,"",[
+  ge("ba/futebol/times/vitoria/noticia/2025/07/05/vitoria-oficializa-a-saida-do-atacante-gustavo-mosquito.ghtml")
+]],
+[19,"Publicação da rescisão no BID.",[
+  "https://atarde.com.br/esportes/esportesvitoria/joao-gabriel-tem-rescisao-publicada-no-bid-e-pode-assinar-com-outro-clube-1155881"
+]],
+[22,"Nome usado e saída em 2025 informados por Ítalo Oliveira. Não confundir com Hugo Gonçalves Ferreira Neto, que possui outro registro nesta relação.",[]],
+[24,"Goleiro emprestado pelo Londrina. Fim do contrato.",[
+  "https://www.bnews.com.br/noticias/esporte/ex-goleiro-entra-na-justica-contra-o-vitoria-cobrando-r-699-mil.html"
+]],
+[25,"Rescisão amigável.",[
+  ge("sp/campinas-e-regiao/futebol/times/xv-de-piracicaba/noticia/ex-palmeiras-e-vitoria-zagueiro-mauricio-ramos-vai-reforcar-o-xv-de-piracicaba-na-serie-a2.ghtml")
+]],
+[28,"Saída de 2014: Carlos Falcão. Retornou em 2021 e se aposentou em 2022, com Fábio Mota. A ação de 2017 é anterior ao retorno de 2021 e não deve ser vinculada à saída de 2022.",[
+  bn("25753-vitoria-tem-20-jogadores-em-fim-de-contrato-veja-situacao-do-elenco-que-disputou-a-serie-c"),
+  bn("10558-empresario-de-dinei-revela-and039prioridade-e-atuar-fora-do-brasiland039")
+]],
+[31,"Rescisão indireta noticiada em 03/06/2025. Data exata da decisão não explicitada no material consultado.",[
+  ge("ba/futebol/times/vitoria/noticia/2025/06/03/justica-aceita-pedido-de-bruno-uvini-e-concede-rescisao-de-contrato-com-o-vitoria.ghtml")
+]],
+[32,"",[
+  bn("29182-vitoria-anuncia-emprestimo-de-jean-mota-e-rescisao-com-caio-vinicius")
+]],
+[33,"Treinador.",[
+  ge("ba/futebol/times/vitoria/noticia/apos-derrota-para-o-america-mg-vitoria-demite-tecnico-bruno-pivetti.ghtml")
+]],
+[34,"Transferência acertada ao fim de outubro e anunciada em novembro. Sem o dia de saída confirmado, não é possível distinguir as duas administrações de outubro de 2021.",[
+  ge("pr/futebol/times/athletico-pr/noticia/apos-longa-negociacao-athletico-oficializa-a-contratacao-do-volante-uruguaio-pablo-siles.ghtml")
+]],
+[36,"Treinador.",[
+  "https://www.tupi.fm/esportes/barroca-se-despede-do-vitoria-e-e-aguardado-neste-sabado-no-botafogo/"
+]],
+[38,"Fim do empréstimo após a temporada 2020. Dia e mês exatos não confirmados.",[fonte2021]],
+[39,"Liberado antes do fim do contrato previsto para dezembro de 2018.",[fonte2018]],
+[42,"Negociado com o Göztepe. Mês confirmado; dia do encerramento não confirmado.",[
+  ge("ba/futebol/times/vitoria/noticia/2025/06/20/vitoria-detalha-operacao-em-venda-de-janderson-com-lucro-e-pagamento-parcelado.ghtml")
+]],
+[44,"Última passagem. Primeira saída em 2013, na gestão Alexi Portela.",[
+  ge("ba/futebol/times/vitoria/noticia/2023/04/20/de-olho-no-abc-vitoria-faz-treino-tatico-dankler-e-joao-lucas-deixam-clube.ghtml")
+]],
+[47,"",[
+  ge("ba/futebol/times/vitoria/noticia/thales-e-mauricio-cordeiro-acertam-rescisao-e-deixam-o-vitoria.ghtml")
+]],
+[52,"Zagueiro Ramon Menezes Roma. Não é o treinador Ramon Menezes Hubner.",[
+  ge("futebol/times/cruzeiro/noticia/cruzeiro-nao-fica-com-ramon-agente-fala-em-caso-de-policia-e-que-zagueiro-foi-feito-de-palhaco.ghtml")
+]],
+[56,"Anunciado pela Chapecoense em julho de 2022. O contrato com o Vitória ia até junho. Dia exato de encerramento não confirmado.",[
+  "https://www.terra.com.br/esportes/chapecoense/chapecoense-anuncia-chegada-de-alisson-farias-e-saida-de-rodrigo-varanda,8f78b7310bfe8fff3d8e7797407aad60i4z6o1qj.html"
+]],
+[57,"Rescisão definitiva. Já havia saído por empréstimo para o Goiás em abril de 2019, com Ricardo David.",[
+  ge("rj/futebol/noticia/2020/01/17/yago-felipe-rescinde-contrato-com-o-vitoria-e-assina-com-o-fluminense-ate-o-fim-de-2021.ghtml")
+]],
+[58,"Contrato prorrogado até o encerramento da Série B 2020, em janeiro de 2021.",[
+  correio("leo-ceara-e-reintegrado-e-fica-disponivel-para-estreia-na-serie-b-0820")
+]],
+[60,"Fim do empréstimo junto ao Coritiba. Dia exato não confirmado.",[
+  ge("ba/futebol/times/vitoria/noticia/quem-fica-quem-sai-quem-volta-vitoria-tem-12-jogadores-com-contrato-para-2020.ghtml")
+]],
+[62,"Fim do vínculo após a Série B. Mês exato do encerramento não confirmado.",[fonte2022]],
+[63,"Fim do empréstimo junto ao Vasco.",[fonte2018]],
+[65,"",[
+  ge("ba/futebol/times/vitoria/noticia/vitoria-anuncia-rescisao-de-contrato-com-walter.ghtml")
+]],
+[66,"Publicação da rescisão no BID.",[
+  ge("ba/futebol/times/vitoria/noticia/sem-atuar-desde-dezembro-nickson-rescinde-contrato-com-o-vitoria.ghtml")
+]],
+[67,"Fim do contrato com o Vitória, após empréstimo ao ABC em março de 2015.",[
+  "https://tribunadonorte.com.br/esportes/neto-coruja-renova-contrato-com-o-abc/"
+]],
+[68,"Volante Pablo Gabriel Sousa Alves. Não confundir com o atacante Pablo de outras temporadas.",[
+  correio("confira-os-contratados-em-2022-que-quase-nao-jogaram-pelo-vitoria-1022")
+]],
+[71,"Acordo em 05/05 e despedida em 12/05. O anúncio inicial de abril foi seguido de desistência, antes do novo acordo.",[
+  ge("ba/futebol/times/vitoria/noticia/2022/05/05/apos-novela-vitoria-entra-em-acordo-com-jadson-para-rescisao-de-contrato.ghtml")
+]],
+[72,"Rescisão anunciada em 24/02. A negociação com o Náutico já havia sido confirmada em 18/02. Dia efetivo não confirmado.",[
+  ge("ba/futebol/times/vitoria/noticia/2026/02/24/vitoria-anuncia-rescisao-de-contrato-com-felipe-cardoso.ghtml")
+]],
+[73,"Acordo anunciado em 13/04. Última passagem, após empréstimo ao Palmeiras.",[
+  ge("ba/futebol/times/vitoria/noticia/2023/04/13/fora-de-campo-ha-tres-anos-luan-silva-entra-em-acordo-com-o-vitoria-por-rescisao-de-contrato.ghtml")
+]],
+[75,"Fim do empréstimo.",[
+  "https://www.bnews.com.br/noticias/esporte/102512-zagueiro-que-atuou-no-vitoria-neste-ano-e-oferecido-ao-vasco.html"
+]],
+[76,"Lateral-esquerdo Fabiano da Silva Souza. Saída em 2021 e gestão Paulo Carneiro informadas por Ítalo Oliveira. A fonte identifica a contratação, não a saída.",[
+  ge("ba/futebol/times/vitoria/noticia/vitoria-oficializa-contratacao-de-fabiano-lateral-que-estava-no-bragantino.ghtml")
+]],
+[79,"Hugo Gonçalves Ferreira Neto. Não confundir com Hugo Leonardo Alves da Silva, que possui outro registro nesta relação.",[
+  ge("ba/futebol/noticia/2025/06/03/vitoria-rescinde-contrato-com-hugo-lateral-emprestado-pelo-botafogo.ghtml")
+]],
+[81,"Também referido como Thiago Conti. Nome usado na saída: Thiaguinho.",[
+  ge("ba/futebol/times/vitoria/noticia/2025/05/23/apos-seis-jogos-vitoria-anuncia-a-rescisao-de-contrato-com-thiaguinho.ghtml")
+]],
+[90,"Nome usado e saída em 2009 informados por Ítalo Oliveira.",[]],
+[93,"Zagueiro da base Luis Filipe Santana Barbosa dos Santos. Saída em 2024 e gestão Fábio Mota informadas por Ítalo Oliveira. A fonte identifica o atleta, não a saída.",[
+  "https://www.cbf.com.br/futebol-brasileiro/times/campeonato-brasileiro/aspirantes/2024/20018/20014/20048/60175?tab=atletas"
+]],
+[95,"Neste processo, o Esporte Clube Vitória figura como credor. Devedor: Riquelme de Carvalho Conceicao.",[]],
+[96,"Empréstimo ao Avaí confirmado em 15/04/2015. Fim definitivo do vínculo não confirmado; contrato previa encerramento ao fim de 2015.",[
+  "https://globoesporte.globo.com/futebol/times/vitoria/noticia/2015/04/de-saida-do-vitoria-nino-divulga-carga-de-despedida-sou-um-privilegiado.html"
+]],
+[100,"Troca com o Coritiba, pelo lateral Norberto. Dia do registro não confirmado.",[
+  "https://www.acordacidade.com.br/esportes/vitoria-troca-zagueiro-por-lateral-do-coritiba/"
+]],
+[101,"Contrato não renovado no mês da mudança de presidência. Sem o dia confirmado, não se escolhe uma única gestão.",[
+  ge("futebol/times/flamengo/noticia/achei-autor-de-golaco-importante-em-2013-amaral-esta-sem-clube-ha-9-meses.ghtml")
+]]
+].map(([id, nota, fontes]) => [id, {nota, fontes}]));
 
-                    <!-- Phase Filter -->
-                    <div>
-                        <select id="phaseFilter" class="w-full bg-ecv-black border border-ecv-border rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-ecv-red transition-all">
-                            <option value="">Todas as Fases</option>
-                            <option value="Conhecimento">Conhecimento</option>
-                            <option value="Execução">Execução</option>
-                            <option value="Liquidação">Liquidação</option>
-                        </select>
-                    </div>
+/* Mesma pessoa em mais de um processo: mantém os detalhes. */
+detalhes.set(15, detalhes.get(9));
+detalhes.set(17, detalhes.get(6));
+detalhes.set(97, detalhes.get(28));
 
-                    <!-- Era / Management Filter -->
-                    <div>
-                        <select id="eraFilter" class="w-full bg-ecv-black border border-ecv-border rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-ecv-red transition-all">
-                            <option value="">Todas as Gestões</option>
-                            <option value="Até 2016 (Alexi/Falcão/R.Viana)">Até 2016 (Alexi/Falcão/R.Viana)</option>
-                            <option value="2017-2018 (Ivã/R.David)">2017-2018 (Ivã/R.David)</option>
-                            <option value="2019-2021 (Paulo Carneiro)">2019-2021 (Paulo Carneiro)</option>
-                            <option value="2022-2026 (Fábio Mota)">2022-2026 (Fábio Mota)</option>
-                        </select>
-                    </div>
+const fases = {
+  C: "Conhecimento",
+  E: "Execução",
+  L: "Liquidação"
+};
 
-                    <!-- Year Filter -->
-                    <div>
-                        <select id="yearFilter" class="w-full bg-ecv-black border border-ecv-border rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-ecv-red transition-all">
-                            <option value="">Todos os Anos</option>
-                            <!-- Dynamically populated -->
-                        </select>
-                    </div>
-                </div>
-            </div>
+const normalizar = valor =>
+  String(valor ?? "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
 
-            <!-- Responsive Table -->
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-xs text-gray-300">
-                    <thead class="bg-ecv-black text-ecv-grayText uppercase text-[11px] tracking-wider border-b border-ecv-border">
-                        <tr>
-                            <th scope="col" class="py-3.5 px-4 font-bold text-white">#</th>
-                            <th scope="col" class="py-3.5 px-4 font-bold text-white cursor-pointer hover:text-ecv-gold" id="sortCredor">
-                                Credor / Parte <i class="fa-solid fa-sort ml-1">
-</i>
-                            </th>
-                            <th scope="col" class="py-3.5 px-4 font-bold text-white cursor-pointer hover:text-ecv-gold text-right" id="sortValor">
-                                Valor (R$) <i class="fa-solid fa-sort ml-1">
-</i>
-                            </th>
-                            <th scope="col" class="py-3.5 px-4 font-bold text-white text-center">Ano</th>
-                            <th scope="col" class="py-3.5 px-4 font-bold text-white">Gestão Estimada</th>
-                            <th scope="col" class="py-3.5 px-4 font-bold text-white text-center">Fase</th>
-                            <th scope="col" class="py-3.5 px-4 font-bold text-white">Nº do Processo</th>
-                            <th scope="col" class="py-3.5 px-4 font-bold text-white">Advogado(s)</th>
-                        </tr>
-                    </thead>
-                    <tbody id="creditorsTableBody" class="divide-y divide-ecv-border/50">
-                        <!-- Table rows injected via JS -->
-                    </tbody>
-                </table>
-            </div>
+const escapar = valor =>
+  String(valor ?? "").replace(/[&<>"']/g, caractere => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  }[caractere]));
 
-            <!-- Table Footer Summary -->
-            <div class="p-4 bg-ecv-black border-t border-ecv-border flex flex-col sm:flex-row items-center justify-between text-xs text-ecv-grayText gap-2">
-                <div>
-                    Soma dos Itens Filtrados: <strong class="text-ecv-gold text-sm font-bold" id="filteredSumText">R$ 0,00</strong>
-                </div>
-                <div>
-                    Exibindo <span id="visibleCount" class="text-white font-bold">0</span> de <span id="totalCount" class="text-white font-bold">102</span> processos
-                </div>
-            </div>
-        </section>
+const moeda = valor =>
+  new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL"
+  }).format(valor);
 
-    </main>
+const somarCentavos = dados =>
+  dados.reduce((total, item) => total + Math.round(item.valor * 100), 0);
 
-    <!-- Footer Page -->
-    <footer class="bg-ecv-black border-t border-ecv-border mt-12 py-6 text-center text-xs text-ecv-grayText">
-        <div class="max-w-7xl mx-auto px-4 space-y-2">
-            <p class="font-semibold text-white">
-                <i class="fa-solid fa-shield text-ecv-red mr-1">
-</i> Portal Informativo e Transparência Rubro-Negra
-            </p>
-            <p>
-                Fonte dos Dados: Tribunal Regional do Trabalho da 5ª Região (TRT-5) &bull; Juízo de Execução e Expropriação &bull; Processo 0000580-54.2025.5.05.0013 (Data de extração: 08/10/2026)
-            </p>
-            <p class="text-[10px] text-gray-500">
-                Este portal tem caráter puramente informativo e pedagógico para a torcida, sem qualquer intuito oficial do órgão judiciário.
-            </p>
-        </div>
-    </footer>
+const dados = registros.map(linha => {
+  const [
+    id, nomeCompleto, nomeEsportivo, valor,
+    fase, processo, advogado, saida, gestao
+  ] = linha;
 
-    <!-- JavaScript Application Code -->
-    <script>
-        // Raw dataset extracted from TRT-5 Document
-        const rawProcessesData = [
-            { id: 1, credor: "CLEBER SCHWENCK TIENE", valor: 100000.00, fase: "Execução", processo: "0000002-78.2013.5.05.0024", devedor: "ESPORTE CLUBE VITORIA", advogado: "LEONARDO LAPORTA COSTA" },
-            { id: 2, credor: "KENNEDY SILVA SAMPAIO", valor: 134007.70, fase: "Conhecimento", processo: "0000010-80.2026.5.05.0030", devedor: "ESPORTE CLUBE VITORIA", advogado: "MATHEUS AUGUSTO MEINERTZ" },
-            { id: 3, credor: "ARNALDO DE SOUZA RAMOS JUNIOR", valor: 6916263.78, fase: "Conhecimento", processo: "0000014-56.2026.5.05.0018", devedor: "ESPORTE CLUBE VITORIA", advogado: "LUCAS BRAGA RIBEIRO" },
-            { id: 4, credor: "EWANDRO FELIPE DE LIMA COSTA", valor: 561133.89, fase: "Execução", processo: "0000037-95.2023.5.05.0021", devedor: "ESPORTE CLUBE VITORIA", advogado: "RIURY ALVES BARBOSA VIEIRA" },
-            { id: 5, credor: "WR15 MARKETING ESPORTIVO LTDA e outros", valor: 910000.00, fase: "Liquidação", processo: "0000049-10.2026.5.05.0020", devedor: "ESPORTE CLUBE VITORIA", advogado: "THIAGO DE SOUZA RINO e outros" },
-            { id: 6, credor: "MARCOS AURELIO FERNANDES DA SILVA", valor: 2121893.03, fase: "Execução", processo: "0000060-06.2021.5.05.0023", devedor: "ESPORTE CLUBE VITORIA", advogado: "FABIO EUSTAQUIO DA CRUZ" },
-            { id: 7, credor: "ADRIEL NERES DA FONSECA", valor: 12878.16, fase: "Conhecimento", processo: "0000062-97.2026.5.05.0023", devedor: "ESPORTE CLUBE VITORIA", advogado: "IAGO GONCALVES BATISTA" },
-            { id: 8, credor: "WILLIAM WALTER GOMES DE OLIVEIRA", valor: 55105.07, fase: "Conhecimento", processo: "0000070-04.2026.5.05.0014", devedor: "ESPORTE CLUBE VITORIA", advogado: "RICARDO PALMEIRA SANTOS JUNIOR" },
-            { id: 9, credor: "WALLACE REIS SILVA", valor: 2050030.81, fase: "Liquidação", processo: "0000073-34.2019.5.05.0036", devedor: "ESPORTE CLUBE VITORIA", advogado: "ALAN BELACIANO" },
-            { id: 10, credor: "LUCAS CANDIDO SILVA", valor: 347321.66, fase: "Execução", processo: "0000105-98.2021.5.05.0026", devedor: "ESPORTE CLUBE VITORIA", advogado: "FERNANDO MARCIO CRUZ" },
-            { id: 11, credor: "WELLISSON DA CONCEICAO FERREIRA", valor: 272600.00, fase: "Execução", processo: "0000116-88.2021.5.05.0039", devedor: "ESPORTE CLUBE VITORIA", advogado: "MAURICIO COSTA FERNANDES DA CUNHA" },
-            { id: 12, credor: "CLEVERTON MATHEUS DA LUZ TENORIO", valor: 157359.82, fase: "Execução", processo: "0000119-91.2025.5.05.0010", devedor: "ESPORTE CLUBE VITORIA", advogado: "PRISCILLA ITANA LEDO LAGO" },
-            { id: 13, credor: "UELLITON DA SILVA VIEIRA", valor: 80000.00, fase: "Liquidação", processo: "0000131-51.2020.5.05.0020", devedor: "ESPORTE CLUBE VITORIA", advogado: "MANOELA CARVALHO GARCIA e outros" },
-            { id: 14, credor: "WANDERSON PAPATERRA MATOS", valor: 16415.95, fase: "Conhecimento", processo: "0000140-21.2026.5.05.0014", devedor: "ESPORTE CLUBE VITORIA", advogado: "AMANDA XAVIER SOUZA e outros" },
-            { id: 15, credor: "WALLACE REIS SILVA", valor: 5682040.18, fase: "Execução", processo: "0000148-95.2022.5.05.0027", devedor: "ESPORTE CLUBE VITORIA", advogado: "IGOR CAZARINI SEVALLI e outros" },
-            { id: 16, credor: "GUSTAVO HENRIC DA SILVA", valor: 221814.86, fase: "Liquidação", processo: "0000165-58.2026.5.05.0006", devedor: "ESPORTE CLUBE VITORIA", advogado: "LEONARDO LAPORTA COSTA" },
-            { id: 17, credor: "MARCOS AURELIO FERNANDES DA SILVA", valor: 1195224.75, fase: "Execução", processo: "0000175-13.2010.5.05.0023", devedor: "ESPORTE CLUBE VITORIA", advogado: "FABIO EUSTAQUIO DA CRUZ" },
-            { id: 18, credor: "EMERSON ORLANDO MELO", valor: 454132.56, fase: "Execução", processo: "0000176-38.2023.5.05.0024", devedor: "ESPORTE CLUBE VITORIA", advogado: "MARCUS VILLA COSTA" },
-            { id: 19, credor: "JOAO GABRIEL SILVA TELES", valor: 1038640.14, fase: "Execução", processo: "0000192-29.2021.5.05.0002", devedor: "ESPORTE CLUBE VITORIA", advogado: "RAYANNA GABRIELA MACHADO SILVA e outros" },
-            { id: 20, credor: "SINDECLUBES / SIND EMPR ENTID CULT", valor: 52080.00, fase: "Liquidação", processo: "0000204-42.2023.5.05.0012", devedor: "ESPORTE CLUBE VITORIA", advogado: "ANTONIO CARLOS DE FIGUEIREDO SOUZA" },
-            { id: 21, credor: "JOSE OLIMPIO NEVES AZEVEDO", valor: 518908.21, fase: "Execução", processo: "0000245-86.2021.5.05.0009", devedor: "ESPORTE CLUBE VITORIA", advogado: "JAMIL CABUS NETO" },
-            { id: 22, credor: "HUGO LEONARDO ALVES DA SILVA", valor: 95338.47, fase: "Liquidação", processo: "0000246-53.2026.5.05.0023", devedor: "ESPORTE CLUBE VITORIA", advogado: "LARYSSA STEPHANE SILVA SANTOS" },
-            { id: 23, credor: "LUIZ FELIPE PINTO OLIVEIRA DA MOTTA", valor: 108300.00, fase: "Conhecimento", processo: "0000248-87.2025.5.05.0013", devedor: "ESPORTE CLUBE VITORIA", advogado: "MARIA ALICE OLIVEIRA MENEZES" },
-            { id: 24, credor: "CESAR AUGUSTO SOARES DOS REIS RIBELA", valor: 370480.84, fase: "Execução", processo: "0000254-35.2022.5.05.0002", devedor: "ESPORTE CLUBE VITORIA", advogado: "ALEXANDRE OLIVEIRA AZEVEDO DOS SANTOS" },
-            { id: 25, credor: "MAURICIO DONIZETI RAMOS JUNIOR", valor: 993007.13, fase: "Execução", processo: "0000256-85.2021.5.05.0019", devedor: "ESPORTE CLUBE VITORIA", advogado: "JOAO LUIZ FURTADO" },
-            { id: 26, credor: "LUDIMILA DE PAULA GOMES e outros", valor: 40240.45, fase: "Execução", processo: "0000262-60.2024.5.05.0028", devedor: "ESPORTE CLUBE VITORIA", advogado: "PABLO FARIA LIMA" },
-            { id: 27, credor: "NATHALIA CARVALHO DE FIGUEIREDO", valor: 437966.39, fase: "Execução", processo: "0000265-74.2022.5.05.0031", devedor: "ESPORTE CLUBE VITORIA", advogado: "GILDERSON BARROS VIEIRA e outros" },
-            { id: 28, credor: "TELMARIO DE ARAUJO SACRAMENTO (DINEI)", valor: 9486522.25, fase: "Conhecimento", processo: "0000273-54.2017.5.05.0022", devedor: "ESPORTE CLUBE VITORIA", advogado: "THEREZA CRISTINA CARNEIRO GONCALVES BEZERRA SILVA" },
-            { id: 29, credor: "ALESSANDRO BASILIO DE ANDRADE", valor: 24317.18, fase: "Execução", processo: "0000286-84.2025.5.05.0018", devedor: "ESPORTE CLUBE VITORIA", advogado: "RAFAELA MACHADO AMADOR e outros" },
-            { id: 30, credor: "EDVALDO DA SILVA RIBEIRO", valor: 20103.04, fase: "Execução", processo: "0000298-83.2024.5.05.0002", devedor: "ESPORTE CLUBE VITORIA", advogado: "IONARA DE MATOS SOARES RIBEIRO" },
-            { id: 31, credor: "BRUNO UVINI BORTOLANCA", valor: 5755475.84, fase: "Liquidação", processo: "0000299-92.2025.5.05.0015", devedor: "ESPORTE CLUBE VITORIA", advogado: "JOAO HENRIQUE CREN CHIMINAZZO" },
-            { id: 32, credor: "CAIO VINICIUS DA CONCEICAO", valor: 116464.00, fase: "Liquidação", processo: "0000301-59.2026.5.05.0037", devedor: "ESPORTE CLUBE VITORIA", advogado: "JOAO HENRIQUE DE AGUIAR" },
-            { id: 33, credor: "BRUNO MARQUES FERNANDES PIVETTI", valor: 56724.66, fase: "Execução", processo: "0000314-49.2021.5.05.0032", devedor: "ESPORTE CLUBE VITORIA", advogado: "JOAO HENRIQUE CREN CHIMINAZZO" },
-            { id: 34, credor: "PABLO FABRICIO SILES MORALES", valor: 162112.84, fase: "Liquidação", processo: "0000319-51.2023.5.05.0016", devedor: "ESPORTE CLUBE VITORIA", advogado: "HENRIQUE RICHTER CARON e outros" },
-            { id: 35, credor: "JACKSON LIMA DOS SANTOS SOUZA", valor: 130186.35, fase: "Conhecimento", processo: "0000327-90.2026.5.05.0026", devedor: "ESPORTE CLUBE VITORIA", advogado: "EDILENE ROCHA DE JESUS" },
-            { id: 36, credor: "EDUARDO DE SOUZA BARROCA", valor: 566537.53, fase: "Execução", processo: "0000361-37.2022.5.05.0016", devedor: "ESPORTE CLUBE VITORIA", advogado: "CARLOS EDUARDO AMBIEL e outros" },
-            { id: 37, credor: "LUIS FILIPE DANEU FERNANDES", valor: 87997.13, fase: "Execução", processo: "0000368-33.2021.5.05.0026", devedor: "ESPORTE CLUBE VITORIA", advogado: "JAMIL CABUS NETO" },
-            { id: 38, credor: "JONATHAN FERREIRA DA SILVA", valor: 396524.10, fase: "Execução", processo: "0000371-45.2022.5.05.0028", devedor: "ESPORTE CLUBE VITORIA", advogado: "MARCIO FELIPE BUZALAF e outros" },
-            { id: 39, credor: "ANDRE LUIZ BARRETTO SILVA LIMA", valor: 757499.99, fase: "Execução", processo: "0000374-31.2020.5.05.0008", devedor: "ESPORTE CLUBE VITORIA", advogado: "PABLO TRONCOSO OLIVEIRA" },
-            { id: 40, credor: "MILENA RODRIGUES MATOS", valor: 106994.98, fase: "Liquidação", processo: "0000374-69.2023.5.05.0026", devedor: "ESPORTE CLUBE VITORIA", advogado: "LUANDA OLIVEIRA RODRIGUES e outros" },
-            { id: 41, credor: "RODRIGO VASCO DA GAMA NETO", valor: 543545.89, fase: "Execução", processo: "0000378-04.2022.5.05.0039", devedor: "ESPORTE CLUBE VITORIA", advogado: "JAMIL CABUS NETO" },
-            { id: 42, credor: "JANDERSON DE CARVALHO COSTA", valor: 59677.18, fase: "Liquidação", processo: "0000388-11.2026.5.05.0006", devedor: "ESPORTE CLUBE VITORIA", advogado: "DIOGO LIMA DE SOUZA" },
-            { id: 43, credor: "SINDICATO DOS ATLETAS PROFISSIONAIS DA BAHIA / FENAPAF", valor: 1000000.00, fase: "Conhecimento", processo: "0000408-06.2016.5.05.0021", devedor: "ESPORTE CLUBE VITORIA", advogado: "RONALDO VIEIRA PASSOS e outros" },
-            { id: 44, credor: "DANKLER LUIS DE JESUS PEDREIRA", valor: 473406.31, fase: "Execução", processo: "0000411-78.2023.5.05.0032", devedor: "ESPORTE CLUBE VITORIA", advogado: "ANANDA JORGE MATTOS e outros" },
-            { id: 45, credor: "HUMBERTO MIGUEL DA SILVA CLARA", valor: 37258.37, fase: "Execução", processo: "0000414-83.2021.5.05.0038", devedor: "ESPORTE CLUBE VITORIA", advogado: "CARLOS ROBERTO TUDE DE CERQUEIRA" },
-            { id: 46, credor: "ANDRE LUIS VERAS NEPOMUCENO DA SILVA JUNIOR", valor: 61673.71, fase: "Liquidação", processo: "0000446-53.2022.5.05.0006", devedor: "ESPORTE CLUBE VITORIA", advogado: "ERIKA CAVALCANTE GAMA e outros" },
-            { id: 47, credor: "MAURICIO PLENCKAUSKAS CORDEIRO", valor: 373350.81, fase: "Execução", processo: "0000452-44.2020.5.05.0034", devedor: "ESPORTE CLUBE VITORIA", advogado: "RAFAEL ZIPPIN KNIJNIK" },
-            { id: 48, credor: "JOSE DE SOUZA RUVENAL NETO", valor: 300216.40, fase: "Conhecimento", processo: "0000455-49.2026.5.05.0014", devedor: "ESPORTE CLUBE VITORIA", advogado: "ELISEU SOARES PATROCINIO FILHO" },
-            { id: 49, credor: "EDSON GONCALVES VILAS BOAS", valor: 345368.59, fase: "Execução", processo: "0000468-94.2021.5.05.0023", devedor: "ESPORTE CLUBE VITORIA", advogado: "JAMIL CABUS NETO" },
-            { id: 50, credor: "KAMILA SANTOS DE LIMA", valor: 4559.44, fase: "Conhecimento", processo: "0000494-61.2026.5.05.0009", devedor: "ESPORTE CLUBE VITORIA", advogado: "HIGOR MARCELO MAFFEI BELLINI" },
-            { id: 51, credor: "JULIO CESAR BARBOSA SACRAMENTO", valor: 218337.03, fase: "Liquidação", processo: "0000514-04.2026.5.05.0025", devedor: "ESPORTE CLUBE VITORIA", advogado: "SERGIO FERREIRA DOS SANTOS e outros" },
-            { id: 52, credor: "RAMON MENEZES ROMA", valor: 694373.92, fase: "Execução", processo: "0000521-33.2021.5.05.0037", devedor: "ESPORTE CLUBE VITORIA", advogado: "FERNANDA SAADE MALAQUIAS DE CASTRO" },
-            { id: 53, credor: "YURI MOURA RIBEIRO SANTANA", valor: 65000.00, fase: "Conhecimento", processo: "0000528-33.2026.5.05.0010", devedor: "ESPORTE CLUBE VITORIA", advogado: "SIRLANDRO PEREIRA DE SA e outros" },
-            { id: 54, credor: "CARLOS EDUARDO DE CAMPOS DE OLIVEIRA", valor: 84689.52, fase: "Execução", processo: "0000535-88.2022.5.05.0002", devedor: "ESPORTE CLUBE VITORIA", advogado: "POLIANA BEORDO NICOLETI" },
-            { id: 55, credor: "SILVIO DE JESUS FERREIRA", valor: 71742.98, fase: "Conhecimento", processo: "0000543-84.2026.5.05.0015", devedor: "ESPORTE CLUBE VITORIA", advogado: "BRUNO DO AMOR DIVINO DOS SANTOS" },
-            { id: 56, credor: "ALISSON ALVES FARIAS", valor: 1051921.31, fase: "Execução", processo: "0000547-90.2023.5.05.0027", devedor: "ESPORTE CLUBE VITORIA", advogado: "ANDRE OLIVEIRA DE MEIRA RIBEIRO" },
-            { id: 57, credor: "YAGO FELIPE DA COSTA ROCHA", valor: 435185.55, fase: "Liquidação", processo: "0000553-17.2020.5.05.0023", devedor: "ESPORTE CLUBE VITORIA", advogado: "EDUARDO BEIL e outros" },
-            { id: 58, credor: "LEONARDO DE SOUSA PEREIRA", valor: 295425.36, fase: "Liquidação", processo: "0000571-49.2021.5.05.0008", devedor: "ESPORTE CLUBE VITORIA", advogado: "MAURICIO COSTA FERNANDES DA CUNHA" },
-            { id: 59, credor: "CASSIMIRO FERREIRA DE ANDRADE", valor: 31585.33, fase: "Liquidação", processo: "0000575-44.2026.5.05.0030", devedor: "ESPORTE CLUBE VITORIA", advogado: "FILIPI BITTI ELER" },
-            { id: 60, credor: "RUY FRANCO DE ALMEIDA JUNIOR", valor: 801162.81, fase: "Execução", processo: "0000576-56.2021.5.05.0013", devedor: "ESPORTE CLUBE VITORIA", advogado: "RODRIGO PUPPI BASTOS" },
-            { id: 61, credor: "COMISSÃO DE CREDORES", valor: 1.00, fase: "Execução", processo: "0000580-54.2025.5.05.0013", devedor: "VITORIA S/A e outros", advogado: "WASHINGTON SANTANA SANTOS e outros" },
-            { id: 62, credor: "VINICIUS DUARTE", valor: 832294.14, fase: "Execução", processo: "0000602-33.2021.5.05.0020", devedor: "ESPORTE CLUBE VITORIA", advogado: "THIAGO DE SOUZA RINO e outros" },
-            { id: 63, credor: "GUILHERME COSTA MACHADO SILVEIRA", valor: 668497.67, fase: "Execução", processo: "0000621-65.2019.5.05.0034", devedor: "ESPORTE CLUBE VITORIA", advogado: "RUY JOAO RIBEIRO GONCALVES JUNIOR" },
-            { id: 64, credor: "MARCELO SANTOS NOGUEIRA", valor: 12052.00, fase: "Conhecimento", processo: "0000624-97.2026.5.05.0026", devedor: "ESPORTE CLUBE VITORIA", advogado: "VINICIUS DE SOUZA LEITAO" },
-            { id: 65, credor: "WALTER HENRIQUE DA SILVA", valor: 11740.53, fase: "Execução", processo: "0000626-91.2021.5.05.0010", devedor: "ESPORTE CLUBE VITORIA", advogado: "ROBSON DA SILVA ALVES TERTO" },
-            { id: 66, credor: "NICKSON GABRIEL REIS SILVA", valor: 986100.92, fase: "Execução", processo: "0000638-21.2020.5.05.0017", devedor: "ESPORTE CLUBE VITORIA", advogado: "VICTOR DOS ANJOS CORDEIRO" },
-            { id: 67, credor: "ISMAEL SOARES BASTOS NETO", valor: 493472.69, fase: "Execução", processo: "0000676-02.2017.5.05.0029", devedor: "ESPORTE CLUBE VITORIA", advogado: "THIAGO DE SOUZA RINO e outros" },
-            { id: 68, credor: "PABLO GABRIEL SOUSA ALVES", valor: 398281.97, fase: "Execução", processo: "0000682-12.2022.5.05.0036", devedor: "ESPORTE CLUBE VITORIA", advogado: "ROBERTO NICOLAU SCHORR JUNIOR" },
-            { id: 69, credor: "DANIEL CAIOBA JOSE DOS SANTOS", valor: 180024.03, fase: "Execução", processo: "0000683-54.2022.5.05.0017", devedor: "ESPORTE CLUBE VITORIA", advogado: "SAULO NOBREGA RIBEIRO CHAVES" },
-            { id: 70, credor: "RODRIGO SANTOS DA SILVA", valor: 46917.17, fase: "Conhecimento", processo: "0000689-05.2025.5.05.0034", devedor: "ESPORTE CLUBE VITORIA", advogado: "RAFAELA MACHADO AMADOR e outros" },
-            { id: 71, credor: "JADSON RODRIGUES DA SILVA", valor: 448000.70, fase: "Execução", processo: "0000697-38.2022.5.05.0017", devedor: "ESPORTE CLUBE VITORIA", advogado: "JOAO HENRIQUE DE AGUIAR e outros" },
-            { id: 72, credor: "FELIPE CARDOSO", valor: 398058.06, fase: "Conhecimento", processo: "0000708-52.2026.5.05.0009", devedor: "ESPORTE CLUBE VITORIA", advogado: "THIAGO DE SOUZA RINO e outros" },
-            { id: 73, credor: "LUAN SILVA DOS SANTOS", valor: 212515.46, fase: "Execução", processo: "0000734-16.2023.5.05.0022", devedor: "ESPORTE CLUBE VITORIA", advogado: "FABIO EUSTAQUIO DA CRUZ" },
-            { id: 74, credor: "EDNES SIDREIRA DA SILVA", valor: 150394.15, fase: "Conhecimento", processo: "0000746-22.2022.5.05.0133", devedor: "ESPORTE CLUBE VITORIA", advogado: "GABRIEL ARAUJO LACERDA e outros" },
-            { id: 75, credor: "ROGER DE CARVALHO", valor: 322546.30, fase: "Execução", processo: "0000752-82.2015.5.05.0033", devedor: "ESPORTE CLUBE VITORIA", advogado: "FILIPE ORSOLINI PINTO DE SOUZA" },
-            { id: 76, credor: "FABIANO DA SILVA SOUZA", valor: 727558.46, fase: "Execução", processo: "0000762-60.2022.5.05.0008", devedor: "ESPORTE CLUBE VITORIA", advogado: "WESLEI MATOS DE OLIVEIRA" },
-            { id: 77, credor: "MICHEL AGUIAR DOS SANTOS", valor: 403062.33, fase: "Conhecimento", processo: "0000784-20.2024.5.05.0018", devedor: "ESPORTE CLUBE VITORIA", advogado: "INGO SA HAGE CALABRICH" },
-            { id: 78, credor: "LUIZ ALCIDES PEREIRA CONCEICAO", valor: 639946.38, fase: "Conhecimento", processo: "0000821-13.2025.5.05.0018", devedor: "ESPORTE CLUBE VITORIA", advogado: "INGO SA HAGE CALABRICH" },
-            { id: 79, credor: "HUGO GONCALVES FERREIRA NETO", valor: 530824.10, fase: "Execução", processo: "0000823-13.2025.5.05.0008", devedor: "ESPORTE CLUBE VITORIA", advogado: "CLAUDIO KLEMENT RODRIGUES" },
-            { id: 80, credor: "BRENO TILLON CACHOEIRA DANTAS", valor: 82494.88, fase: "Conhecimento", processo: "0000844-11.2025.5.05.0033", devedor: "ESPORTE CLUBE VITORIA", advogado: "ALISSON SOARES DE ALMEIDA" },
-            { id: 81, credor: "THIAGO BESERRA SANTOS CONTI", valor: 220000.00, fase: "Execução", processo: "0000864-02.2025.5.05.0033", devedor: "ESPORTE CLUBE VITORIA", advogado: "THIAGO DE SOUZA RINO e outros" },
-            { id: 82, credor: "EDUARDO MARIANO DE OLIVEIRA", valor: 94820.46, fase: "Conhecimento", processo: "0000877-80.2025.5.05.0039", devedor: "ESPORTE CLUBE VITORIA", advogado: "FILIPE ORSOLINI PINTO DE SOUZA" },
-            { id: 83, credor: "LUIZ HENRIQUE GOMES DE JESUS", valor: 16868.44, fase: "Execução", processo: "0000879-39.2023.5.05.0033", devedor: "ESPORTE CLUBE VITORIA", advogado: "DANIELA SANTOS CRUZ" },
-            { id: 84, credor: "JOSE AUGUSTO DOS SANTOS NETO", valor: 23809.62, fase: "Execução", processo: "0000892-19.2023.5.05.0007", devedor: "ESPORTE CLUBE VITORIA", advogado: "FLAVIO FRANCA DALTRO e outros" },
-            { id: 85, credor: "FRANCISCO ABIEZEL MARCIO ELOY SILVA LUZ", valor: 2840.38, fase: "Conhecimento", processo: "0000905-26.2026.5.05.0035", devedor: "ESPORTE CLUBE VITORIA", advogado: "RABELO DANTAS e outros" },
-            { id: 86, credor: "JOAO MARCOS DA PAIXÃO SILVESTRE", valor: 65000.00, fase: "Conhecimento", processo: "0000918-30.2026.5.05.0001", devedor: "ESPORTE CLUBE VITORIA", advogado: "YURI MOURA RIBEIRO DE SA e outros" },
-            { id: 87, credor: "FERNANDA AMORIM DE ABREU", valor: 4176448.39, fase: "Conhecimento", processo: "0000970-57.2026.5.05.0023", devedor: "ESPORTE CLUBE VITORIA", advogado: "EDMILLE SANTOS SILVA e outros" },
-            { id: 88, credor: "PATRIC BARBOSA FRAGA", valor: 25355.20, fase: "Conhecimento", processo: "0001006-53.2026.5.05.0006", devedor: "ESPORTE CLUBE VITORIA", advogado: "LUCAS SILVA DE OLIVEIRA" },
-            { id: 89, credor: "CESAR CARVALHO MENDES", valor: 689740.45, fase: "Conhecimento", processo: "0001011-82.2025.5.05.0015", devedor: "ESPORTE CLUBE VITORIA", advogado: "MARIJU RAMOS MACIEL" },
-            { id: 90, credor: "LEANDRO DA SILVA", valor: 874637.45, fase: "Conhecimento", processo: "0001012-67.2025.5.05.0015", devedor: "ESPORTE CLUBE VITORIA", advogado: "MARIJU RAMOS MACIEL" },
-            { id: 91, credor: "DENIS FARIA LUUP", valor: 328915.39, fase: "Conhecimento", processo: "0001024-14.2025.5.05.0005", devedor: "ESPORTE CLUBE VITORIA", advogado: "MARIJU RAMOS MACIEL" },
-            { id: 92, credor: "VINICIUS MARTINS FRANCO", valor: 141115.53, fase: "Conhecimento", processo: "0001027-14.2026.5.05.0011", devedor: "ESPORTE CLUBE VITORIA", advogado: "MORENA CARVALHO COSTA" },
-            { id: 93, credor: "LUIS FILIPE SANTANA BARBOSA DOS SANTOS", valor: 73917.67, fase: "Liquidação", processo: "0001043-39.2025.5.05.0031", devedor: "ESPORTE CLUBE VITORIA", advogado: "DIENEFER OLIVEIRA SANTOS e outros" },
-            { id: 94, credor: "UNIÃO FEDERAL (PGFN)", valor: 298539.73, fase: "Execução", processo: "0001044-72.2025.5.05.0015", devedor: "ESPORTE CLUBE VITORIA", advogado: "PROCURADORIA GERAL DA FAZENDA NACIONAL" },
-            { id: 95, credor: "MARCELO ALEXANDRE ROCCO DA HORA", valor: 12167.78, fase: "Conhecimento", processo: "0001058-13.2026.5.05.0018", devedor: "ESPORTE CLUBE VITORIA", advogado: "RIQUELME DE CARVALHO CONCEICAO SERRANO" },
-            { id: 96, credor: "SEVERINO DO RAMO CLEMENTINO DA SILVA", valor: 1454706.43, fase: "Execução", processo: "0001090-36.2017.5.05.0017", devedor: "ESPORTE CLUBE VITORIA", advogado: "LEONARDO LAPORTA COSTA" },
-            { id: 97, credor: "TELMARIO DE ARAUJO SACRAMENTO (DINEI)", valor: 6175562.96, fase: "Liquidação", processo: "0001138-96.2025.5.05.0022", devedor: "ESPORTE CLUBE VITORIA", advogado: "THEREZA CRISTINA CARNEIRO GONCALVES BEZERRA SILVA" },
-            { id: 98, credor: "ANA CARLA GONCALVES SOUZA", valor: 71617.48, fase: "Liquidação", processo: "0001174-56.2025.5.05.0017", devedor: "ESPORTE CLUBE VITORIA", advogado: "PABLO FERREIRA FURTADO DE OLIVEIRA" },
-            { id: 99, credor: "VERA LUCIA DA SILVA", valor: 411682.11, fase: "Execução", processo: "0001231-94.2017.5.05.0004", devedor: "ESPORTE CLUBE VITORIA", advogado: "AURELIO PIRES e outros" },
-            { id: 100, credor: "EDNEI BARBOSA DE SOUZA", valor: 970968.45, fase: "Execução", processo: "0001281-39.2016.5.05.0010", devedor: "ESPORTE CLUBE VITORIA", advogado: "BEATRIZ MARIA RAMOS DE SOUZA e outros" },
-            { id: 101, credor: "MAURICIO AZEVEDO ALVES", valor: 669488.38, fase: "Execução", processo: "0001376-41.2017.5.05.0008", devedor: "ESPORTE CLUBE VITORIA", advogado: "ALAN BELACIANO" },
-            { id: 102, credor: "JORGE ARESTIDES FREIRE SANDE", valor: 2105.39, fase: "Execução", processo: "0034500-06.2008.5.05.0016", devedor: "ESPORTE CLUBE VITORIA e outros", advogado: "VALMIR NOVAIS FREITAS" }
-        ];
+  const complemento = detalhes.get(id) || {nota: "", fontes: []};
+  const anoEncontrado = processo.match(/\.(\d{4})\./);
 
-        // Famous Creditors Key Names for quick filtering
-        const famousCreditors = [
-            { name: "Schwenck", query: "SCHWENCK" },
-            { name: "Dinei (Telmário)", query: "TELMARIO" },
-            { name: "Bruno Uvini", query: "BRUNO UVINI" },
-            { name: "Wallace Reis", query: "WALLACE REIS" },
-            { name: "Eduardo Barroca", query: "BARROCA" },
-            { name: "Ramon Menezes", query: "RAMON MENEZES" },
-            { name: "Alisson Farias", query: "ALISSON ALVES FARIAS" },
-            { name: "Yago Felipe", query: "YAGO FELIPE" },
-            { name: "Luan Silva", query: "LUAN SILVA" },
-            { name: "Dankler", query: "DANKLER" },
-            { name: "Uelliton", query: "UELLITON" }
-        ];
+  return {
+    id,
+    nomeCompleto,
+    nomeEsportivo,
+    credor: nomeEsportivo || nomeCompleto,
+    valor,
+    fase: fases[fase],
+    processo,
+    advogado,
+    saida: saida || "Não apurada",
+    gestao: gestao || "Não apurada",
+    ano: anoEncontrado ? Number(anoEncontrado[1]) : null,
+    nota: complemento.nota,
+    fontes: complemento.fontes
+  };
+});
 
-        // Helper function to extract year from CNJ process string
-        function extractYearFromProcess(processo) {
-            if (!processo) return 2026;
-            const parts = processo.split('.');
-            if (parts.length >= 2) {
-                const yearCandidate = parseInt(parts[1], 10);
-                if (!isNaN(yearCandidate) && yearCandidate >= 1990 && yearCandidate <= 2030) {
-                    return yearCandidate;
-                }
-            }
-            return 2026;
+const elementos = {
+  tabela: document.getElementById("creditorsTableBody"),
+  busca: document.getElementById("searchInput"),
+  fase: document.getElementById("phaseFilter"),
+  gestao: document.getElementById("eraFilter"),
+  ano: document.getElementById("yearFilter"),
+  limpar: document.getElementById("btnResetFilters"),
+  quantidade: document.getElementById("recordsCount"),
+  visiveis: document.getElementById("visibleCount"),
+  total: document.getElementById("totalCount"),
+  soma: document.getElementById("filteredSumText"),
+  atalhos: document.getElementById("quickFilterBadges")
+};
+
+let campoOrdenacao = "valor";
+let direcaoOrdenacao = "desc";
+
+function preencherResumo() {
+  const totalCentavos = somarCentavos(dados);
+
+  document.getElementById("cardTotalDebt").textContent =
+    moeda(totalCentavos / 100);
+
+  document.getElementById("cardTotalCount").textContent =
+    `${dados.length} processos relacionados`;
+
+  const configuracoes = [
+    ["Conhecimento", "Conhecimento"],
+    ["Execução", "Execucao"],
+    ["Liquidação", "Liquidacao"]
+  ];
+
+  configuracoes.forEach(([fase, sufixo]) => {
+    const grupo = dados.filter(item => item.fase === fase);
+    const centavos = somarCentavos(grupo);
+    const percentual = totalCentavos ? centavos / totalCentavos * 100 : 0;
+
+    document.getElementById("count" + sufixo).textContent =
+      `${grupo.length} ações`;
+
+    document.getElementById("value" + sufixo).textContent =
+      moeda(centavos / 100);
+
+    document.getElementById("bar" + sufixo).style.width =
+      percentual + "%";
+
+    document.getElementById("percent" + sufixo).textContent =
+      percentual.toLocaleString("pt-BR", {
+        minimumFractionDigits: 1,
+        maximumFractionDigits: 1
+      }) + "% dos valores relacionados";
+  });
+
+  const identificados = dados.filter(item => item.nomeEsportivo).length;
+  const comSaida = dados.filter(item => item.saida !== "Não apurada").length;
+
+  document.getElementById("researchCoverage").textContent =
+    `${identificados} registros com nome esportivo ou profissional identificado; ` +
+    `${comSaida} com saída registrada. As demais informações seguem sinalizadas.`;
+}
+
+function preencherFiltros() {
+  const gestoes = [...new Set(dados.map(item => item.gestao))]
+    .sort((a, b) => a.localeCompare(b, "pt-BR"));
+
+  const anos = [...new Set(dados.map(item => item.ano))]
+    .filter(ano => ano !== null)
+    .sort((a, b) => b - a);
+
+  gestoes.forEach(gestao => {
+    const opcao = document.createElement("option");
+    opcao.value = gestao;
+    opcao.textContent = gestao;
+    elementos.gestao.appendChild(opcao);
+  });
+
+  anos.forEach(ano => {
+    const opcao = document.createElement("option");
+    opcao.value = String(ano);
+    opcao.textContent = String(ano);
+    elementos.ano.appendChild(opcao);
+  });
+}
+
+function preencherAtalhos() {
+  const pessoas = new Map();
+
+  dados.forEach(item => {
+    if (item.nomeEsportivo && !pessoas.has(item.nomeCompleto)) {
+      pessoas.set(item.nomeCompleto, item);
+    }
+  });
+
+  pessoas.forEach(item => {
+    const botao = document.createElement("button");
+
+    botao.type = "button";
+    botao.className =
+      "px-2.5 py-1 rounded-lg bg-ecv-black hover:bg-ecv-red/20 " +
+      "border border-ecv-border hover:border-ecv-red text-xs transition-all";
+
+    /* Diferencia os dois credores chamados Hugo. */
+    const homonimos = [...pessoas.values()]
+      .filter(pessoa => pessoa.nomeEsportivo === item.nomeEsportivo);
+
+    botao.textContent = homonimos.length > 1
+      ? `${item.nomeEsportivo} — ${item.id === 22 ? "Hugo Leonardo" : "Hugo Gonçalves"}`
+      : item.nomeEsportivo;
+
+    botao.title = item.nomeCompleto;
+
+    botao.addEventListener("click", () => {
+      elementos.busca.value = item.nomeCompleto;
+      aplicarFiltros();
+    });
+
+    elementos.atalhos.appendChild(botao);
+  });
+}
+
+function renderizarTabela(lista) {
+  if (!lista.length) {
+    elementos.tabela.innerHTML = `
+      <tr>
+        <td colspan="9" class="text-center py-12 text-ecv-grayText">
+          Nenhum processo localizado com os filtros selecionados.
+        </td>
+      </tr>
+    `;
+    return;
+  }
+
+  elementos.tabela.innerHTML = lista.map(item => {
+    const classeFase = {
+      "Conhecimento": "bg-blue-500/20 text-blue-400 border-blue-500/30",
+      "Execução": "bg-ecv-red/20 text-ecv-red border-ecv-red/30",
+      "Liquidação": "bg-ecv-gold/20 text-ecv-gold border-ecv-gold/30"
+    }[item.fase];
+
+    const fontesHTML = item.fontes.map((url, indice) => `
+      <a
+        href="${escapar(url)}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="block underline mt-2 text-blue-300"
+      >Fonte ${indice + 1}</a>
+    `).join("");
+
+    const observacao = item.nota ||
+      (item.nomeEsportivo
+        ? "Saída registrada conforme o levantamento."
+        : "Identificação e saída ainda não apuradas.");
+
+    return `
+      <tr class="hover:bg-ecv-black/50 transition-colors">
+        <td class="py-3 px-4 font-mono text-ecv-grayText">
+          ${item.id}
+        </td>
+
+        <td class="py-3 px-4 font-bold text-white min-w-[220px]">
+          ${escapar(item.credor)}
+
+          <details class="font-normal text-[11px] text-ecv-grayText mt-2">
+            <summary class="text-ecv-gold">Nome completo e fontes</summary>
+            <p>${escapar(item.nomeCompleto)}</p>
+            <p class="mt-2">${escapar(observacao)}</p>
+            ${fontesHTML}
+          </details>
+        </td>
+
+        <td class="py-3 px-4 font-extrabold text-right text-ecv-gold font-mono whitespace-nowrap">
+          ${moeda(item.valor)}
+        </td>
+
+        <td class="py-3 px-4 text-center font-bold">
+          ${item.ano ?? "—"}
+        </td>
+
+        <td class="py-3 px-4 text-white min-w-[150px]">
+          ${escapar(item.saida)}
+        </td>
+
+        <td class="py-3 px-4 text-ecv-grayText min-w-[160px]">
+          ${escapar(item.gestao)}
+        </td>
+
+        <td class="py-3 px-4">
+          <span class="px-2 py-1 rounded text-[10px] font-bold border ${classeFase}">
+            ${escapar(item.fase)}
+          </span>
+        </td>
+
+        <td class="py-3 px-4 font-mono text-[11px] whitespace-nowrap">
+          ${escapar(item.processo)}
+        </td>
+
+        <td
+          class="py-3 px-4 text-[11px] text-ecv-grayText min-w-[190px]"
+          title="${escapar(item.advogado)}"
+        >
+          ${escapar(item.advogado)}
+        </td>
+      </tr>
+    `;
+  }).join("");
+}
+
+function aplicarFiltros() {
+  const busca = normalizar(elementos.busca.value).trim();
+  const fase = elementos.fase.value;
+  const gestao = elementos.gestao.value;
+  const ano = elementos.ano.value;
+
+  const filtrados = dados.filter(item => {
+    const texto = normalizar([
+      item.credor,
+      item.nomeCompleto,
+      item.processo,
+      item.advogado,
+      item.saida
+    ].join(" "));
+
+    return (!busca || texto.includes(busca)) &&
+      (!fase || item.fase === fase) &&
+      (!gestao || item.gestao === gestao) &&
+      (!ano || String(item.ano) === ano);
+  });
+
+  filtrados.sort((a, b) => {
+    const primeiro = a[campoOrdenacao];
+    const segundo = b[campoOrdenacao];
+
+    const comparacao = typeof primeiro === "number"
+      ? primeiro - segundo
+      : String(primeiro).localeCompare(String(segundo), "pt-BR");
+
+    return direcaoOrdenacao === "asc" ? comparacao : -comparacao;
+  });
+
+  elementos.quantidade.textContent = `${filtrados.length} registros`;
+  elementos.visiveis.textContent = String(filtrados.length);
+  elementos.total.textContent = String(dados.length);
+  elementos.soma.textContent = moeda(somarCentavos(filtrados) / 100);
+
+  renderizarTabela(filtrados);
+}
+
+function criarGraficos() {
+  if (typeof Chart === "undefined") return;
+
+  const totaisGestao = new Map();
+
+  dados.forEach(item => {
+    totaisGestao.set(
+      item.gestao,
+      (totaisGestao.get(item.gestao) || 0) + Math.round(item.valor * 100)
+    );
+  });
+
+  new Chart(document.getElementById("managementChart"), {
+    type: "doughnut",
+    data: {
+      labels: [...totaisGestao.keys()],
+      datasets: [{
+        data: [...totaisGestao.values()].map(valor => valor / 100),
+        backgroundColor: [
+          "#3B82F6", "#FFC72C", "#64748B", "#E20613",
+          "#10B981", "#A855F7", "#06B6D4", "#F97316",
+          "#EC4899", "#8B5CF6", "#78716C"
+        ],
+        borderColor: "#111113",
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: "bottom",
+          labels: {
+            color: "#9CA3AF",
+            font: {size: 10, family: "Inter"}
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: contexto =>
+              `${contexto.label}: ${moeda(contexto.raw)}`
+          }
         }
+      }
+    }
+  });
 
-        // Helper to determine management era based on process year
-        function getEraFromYear(year) {
-            if (year <= 2016) return "Até 2016 (Alexi/Falcão/R.Viana)";
-            if (year >= 2017 && year <= 2018) return "2017-2018 (Ivã/R.David)";
-            if (year >= 2019 && year <= 2021) return "2019-2021 (Paulo Carneiro)";
-            return "2022-2026 (Fábio Mota)";
+  /*
+  Agrupa pelo nome completo, evitando juntar pessoas distintas
+  que utilizam o mesmo nome esportivo.
+  */
+  const porCredor = new Map();
+
+  dados.forEach(item => {
+    const atual = porCredor.get(item.nomeCompleto) || {
+      nome: item.credor,
+      centavos: 0
+    };
+
+    atual.centavos += Math.round(item.valor * 100);
+    porCredor.set(item.nomeCompleto, atual);
+  });
+
+  const maiores = [...porCredor.values()]
+    .sort((a, b) => b.centavos - a.centavos)
+    .slice(0, 6);
+
+  new Chart(document.getElementById("topCreditorsChart"), {
+    type: "bar",
+    data: {
+      labels: maiores.map(item => item.nome),
+      datasets: [{
+        label: "Valor relacionado",
+        data: maiores.map(item => item.centavos / 100),
+        backgroundColor: "#E20613",
+        borderRadius: 6
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      indexAxis: "y",
+      plugins: {
+        legend: {display: false},
+        tooltip: {
+          callbacks: {
+            label: contexto => moeda(contexto.raw)
+          }
         }
-
-        // Process data enhancement
-        const processedData = rawProcessesData.map(item => {
-            const ano = extractYearFromProcess(item.processo);
-            const gestao = getEraFromYear(ano);
-            return { ...item, ano, gestao };
-        });
-
-        // App State
-        let currentFilteredData = [...processedData];
-        let currentSortField = 'valor';
-        let currentSortDirection = 'desc';
-
-        // DOM Elements
-        const creditorsTableBody = document.getElementById('creditorsTableBody');
-        const searchInput = document.getElementById('searchInput');
-        const phaseFilter = document.getElementById('phaseFilter');
-        const eraFilter = document.getElementById('eraFilter');
-        const yearFilter = document.getElementById('yearFilter');
-        const btnResetFilters = document.getElementById('btnResetFilters');
-        const recordsCount = document.getElementById('recordsCount');
-        const visibleCount = document.getElementById('visibleCount');
-        const totalCount = document.getElementById('totalCount');
-        const filteredSumText = document.getElementById('filteredSumText');
-        const quickFilterBadges = document.getElementById('quickFilterBadges');
-
-        // Format Currency BRL
-        function formatBRL(val) {
-            return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(val);
+      },
+      scales: {
+        x: {
+          ticks: {
+            color: "#9CA3AF",
+            font: {size: 9},
+            callback: valor =>
+              "R$ " + (valor / 1000000).toLocaleString("pt-BR", {
+                maximumFractionDigits: 1
+              }) + " mi"
+          },
+          grid: {color: "#2A2A30"}
+        },
+        y: {
+          ticks: {
+            color: "#F3F4F6",
+            font: {size: 10}
+          },
+          grid: {display: false}
         }
+      }
+    }
+  });
+}
 
-        // Render Quick Filter Badges
-        function renderQuickBadges() {
-            quickFilterBadges.innerHTML = famousCreditors.map(item => `
-                <button onclick="applyQuickSearch('${item.query}')" class="px-2.5 py-1 rounded-lg bg-ecv-black hover:bg-ecv-red/20 hover:border-ecv-red border border-ecv-border text-xs text-white transition-all flex items-center gap-1.5">
-                    <i class="fa-solid fa-user text-ecv-gold text-[10px]">
-</i>
-                    ${item.name}
-                </button>
-            `).join('');
-        }
+elementos.busca.addEventListener("input", aplicarFiltros);
+elementos.fase.addEventListener("change", aplicarFiltros);
+elementos.gestao.addEventListener("change", aplicarFiltros);
+elementos.ano.addEventListener("change", aplicarFiltros);
 
-        function applyQuickSearch(query) {
-            searchInput.value = query;
-            applyFilters();
-        }
+elementos.limpar.addEventListener("click", () => {
+  elementos.busca.value = "";
+  elementos.fase.value = "";
+  elementos.gestao.value = "";
+  elementos.ano.value = "";
+  campoOrdenacao = "valor";
+  direcaoOrdenacao = "desc";
+  aplicarFiltros();
+});
 
-        // Populate Years Dropdown
-        function populateYearFilter() {
-            const years = [...new Set(processedData.map(d => d.ano))].sort((a, b) => b - a);
-            years.forEach(yr => {
-                const opt = document.createElement('option');
-                opt.value = yr;
-                opt.textContent = yr;
-                yearFilter.appendChild(opt);
-            });
-        }
+document.getElementById("sortValor").addEventListener("click", () => {
+  direcaoOrdenacao = campoOrdenacao === "valor" && direcaoOrdenacao === "desc"
+    ? "asc"
+    : "desc";
+  campoOrdenacao = "valor";
+  aplicarFiltros();
+});
 
-        // Render Creditors Table
-        function renderTable(data) {
-            if (data.length === 0) {
-                creditorsTableBody.innerHTML = `
-                    <tr>
-                        <td colspan="8" class="text-center py-12 text-ecv-grayText">
-                            <i class="fa-solid fa-folder-open text-3xl mb-2 text-ecv-grayText block">
-</i>
-                            Nenhum processo localizado com os filtros selecionados.
-                        </td>
-                    </tr>
-                `;
-                return;
-            }
+document.getElementById("sortCredor").addEventListener("click", () => {
+  direcaoOrdenacao = campoOrdenacao === "credor" && direcaoOrdenacao === "asc"
+    ? "desc"
+    : "asc";
+  campoOrdenacao = "credor";
+  aplicarFiltros();
+});
 
-            creditorsTableBody.innerHTML = data.map((item, index) => {
-                let badgeClass = "bg-gray-800 text-gray-300";
-                if (item.fase === "Execução") badgeClass = "bg-ecv-red/20 text-ecv-red border border-ecv-red/30";
-                if (item.fase === "Conhecimento") badgeClass = "bg-blue-500/20 text-blue-400 border border-blue-500/30";
-                if (item.fase === "Liquidação") badgeClass = "bg-ecv-gold/20 text-ecv-gold border border-ecv-gold/30";
-
-                return `
-                    <tr class="hover:bg-ecv-black/50 transition-colors">
-                        <td class="py-3 px-4 font-mono text-ecv-grayText text-[11px]">${index + 1}</td>
-                        <td class="py-3 px-4 font-bold text-white">${item.credor}</td>
-                        <td class="py-3 px-4 font-extrabold text-right text-ecv-gold font-mono">${formatBRL(item.valor)}</td>
-                        <td class="py-3 px-4 text-center font-bold text-gray-300">${item.ano}</td>
-                        <td class="py-3 px-4 text-xs text-ecv-grayText">${item.gestao}</td>
-                        <td class="py-3 px-4 text-center">
-                            <span class="px-2 py-0.5 rounded text-[10px] font-bold ${badgeClass}">
-                                ${item.fase}
-                            </span>
-                        </td>
-                        <td class="py-3 px-4 font-mono text-[11px] text-gray-400">${item.processo}</td>
-                        <td class="py-3 px-4 text-[11px] text-ecv-grayText truncate max-w-[200px]" title="${item.advogado}">${item.advogado}</td>
-                    </tr>
-                `;
-            }).join('');
-        }
-
-        // Apply Filters and Sorting
-        function applyFilters() {
-            const query = searchInput.value.toLowerCase().trim();
-            const phase = phaseFilter.value;
-            const era = eraFilter.value;
-            const yr = yearFilter.value;
-
-            currentFilteredData = processedData.filter(item => {
-                const matchesQuery = !query || 
-                    item.credor.toLowerCase().includes(query) || 
-                    item.processo.toLowerCase().includes(query) || 
-                    item.advogado.toLowerCase().includes(query);
-                
-                const matchesPhase = !phase || item.fase === phase;
-                const matchesEra = !era || item.gestao === era;
-                const matchesYr = !yr || item.ano.toString() === yr;
-
-                return matchesQuery && matchesPhase && matchesEra && matchesYr;
-            });
-
-            // Sort
-            currentFilteredData.sort((a, b) => {
-                let valA = a[currentSortField];
-                let valB = b[currentSortField];
-
-                if (typeof valA === 'string') {
-                    return currentSortDirection === 'asc' 
-                        ? valA.localeCompare(valB) 
-                        : valB.localeCompare(valA);
-                } else {
-                    return currentSortDirection === 'asc' ? valA - valB : valB - valA;
-                }
-            });
-
-            // Update UI Stats
-            const totalSum = currentFilteredData.reduce((acc, curr) => acc + curr.valor, 0);
-            filteredSumText.textContent = formatBRL(totalSum);
-            recordsCount.textContent = `${currentFilteredData.length} Registros`;
-            visibleCount.textContent = currentFilteredData.length;
-            totalCount.textContent = processedData.length;
-
-            renderTable(currentFilteredData);
-        }
-
-        // Initialize Charts
-        let managementChartInst = null;
-        let topCreditorsChartInst = null;
-
-        function initCharts() {
-            // Era / Management Breakdown Data
-            const eraTotals = {
-                "Até 2016 (Alexi/Falcão/R.Viana)": 0,
-                "2017-2018 (Ivã/R.David)": 0,
-                "2019-2021 (Paulo Carneiro)": 0,
-                "2022-2026 (Fábio Mota)": 0
-            };
-
-            processedData.forEach(item => {
-                if (eraTotals[item.gestao] !== undefined) {
-                    eraTotals[item.gestao] += item.valor;
-                }
-            });
-
-            // Render Management Pie Chart
-            const ctxEra = document.getElementById('managementChart').getContext('2d');
-            managementChartInst = new Chart(ctxEra, {
-                type: 'doughnut',
-                data: {
-                    labels: Object.keys(eraTotals),
-                    datasets: [{
-                        data: Object.values(eraTotals),
-                        backgroundColor: ['#3B82F6', '#10B981', '#E20613', '#FFC72C'],
-                        borderColor: '#111113',
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: {
-                                color: '#9CA3AF',
-                                font: { size: 10, family: 'Inter' }
-                            }
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return ` ${context.label}: ${formatBRL(context.raw)}`;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-
-            // Top Creditors Unified Totals (e.g., Dinei has multiple processes)
-            const creditorAggregated = {};
-            processedData.forEach(item => {
-                const key = item.credor;
-                creditorAggregated[key] = (creditorAggregated[key] || 0) + item.valor;
-            });
-
-            const sortedTopCreditors = Object.entries(creditorAggregated)
-                .map(([credor, total]) => ({ credor, total }))
-                .sort((a, b) => b.total - a.total)
-                .slice(0, 6);
-
-            const ctxTop = document.getElementById('topCreditorsChart').getContext('2d');
-            topCreditorsChartInst = new Chart(ctxTop, {
-                type: 'bar',
-                data: {
-                    labels: sortedTopCreditors.map(c => c.credor.length > 20 ? c.credor.substring(0, 20) + '...' : c.credor),
-                    datasets: [{
-                        label: 'Valor Devido (R$)',
-                        data: sortedTopCreditors.map(c => c.total),
-                        backgroundColor: '#E20613',
-                        borderRadius: 6
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    indexAxis: 'y',
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return ` Total: ${formatBRL(context.raw)}`;
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        x: {
-                            ticks: {
-                                color: '#9CA3AF',
-                                font: { size: 9 },
-                                callback: function(value) { return 'R$ ' + (value/1000000).toFixed(1) + 'M'; }
-                            },
-                            grid: { color: '#2A2A30' }
-                        },
-                        y: {
-                            ticks: { color: '#F3F4F6', font: { size: 10 } },
-                            grid: { display: false }
-                        }
-                    }
-                }
-            });
-        }
-
-        // Event Listeners
-        document.addEventListener('DOMContentLoaded', () => {
-            renderQuickBadges();
-            populateYearFilter();
-            initCharts();
-
-            // Initial render
-            applyFilters();
-
-            // Filter changes
-            searchInput.addEventListener('input', applyFilters);
-            phaseFilter.addEventListener('change', applyFilters);
-            eraFilter.addEventListener('change', applyFilters);
-            yearFilter.addEventListener('change', applyFilters);
-
-            btnResetFilters.addEventListener('click', () => {
-                searchInput.value = '';
-                phaseFilter.value = '';
-                eraFilter.value = '';
-                yearFilter.value = '';
-                currentSortField = 'valor';
-                currentSortDirection = 'desc';
-                applyFilters();
-            });
-
-            // Sorting event listeners
-            document.getElementById('sortValor').addEventListener('click', () => {
-                if (currentSortField === 'valor') {
-                    currentSortDirection = currentSortDirection === 'asc' ? 'desc' : 'asc';
-                } else {
-                    currentSortField = 'valor';
-                    currentSortDirection = 'desc';
-                }
-                applyFilters();
-            });
-
-            document.getElementById('sortCredor').addEventListener('click', () => {
-                if (currentSortField === 'credor') {
-                    currentSortDirection = currentSortDirection === 'asc' ? 'desc' : 'asc';
-                } else {
-                    currentSortField = 'credor';
-                    currentSortDirection = 'asc';
-                }
-                applyFilters();
-            });
-        });
-    </script>
+preencherResumo();
+preencherFiltros();
+preencherAtalhos();
+aplicarFiltros();
+criarGraficos();
+</script>
 </body>
 </html>
